@@ -1,0 +1,47 @@
+#################################
+hospital: healthchecks for Python
+#################################
+
+* Tools to diagnose Python (supervision, monitoring).
+* Diagnosis scenarios.
+* Built upon unittest.
+* Helpers to fix things (automatically?).
+
+
+*******
+Example
+*******
+
+.. code-block:: python
+
+   from hospital import HealthCheck
+
+   class DatabaseHealthCheck(HealthCheck):
+       def test_open_connection(self):
+           """Can open connection to database."""
+ 
+       def test_ping_host(self):
+           """Can ping database host."""
+
+       def test_driver(self):
+           """Database's client library for Python can be imported."""
+
+       def diagnose_database_connection(self):
+           """Can connect to database."""
+           self.assertAny(self.test_open_connection,
+   		       self.test_ping_host,
+   		       self.test_driver)
+
+       def fix_database_driver(self):
+           """Trigger installation of database library."""
+           my_provisioner.install(database_library, confirm=True)
+
+
+***********
+Integration
+***********
+
+* builtin integration with unittest ecosystem: nose, Jenkins...
+* third-party libraries provides reporting tools and diagnoses implementations.
+* django-doctor provides Django views for healthchecks.
+* django-doctor provides a set of useful healthchecks for Django.

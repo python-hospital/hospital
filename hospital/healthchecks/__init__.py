@@ -5,23 +5,42 @@ import sys
 import pkg_resources
 
 from hospital import HealthCheck
-from hospital.packaging import supports_python_version
+import hospital.packaging
 
 
-class PythonVersionHealthCheck(HealthCheck):
-    """Make sure hospital runs on supported Python version.
+class DistributionHealthCheck(HealthCheck):
+    """Several checks related to project's distribution.
 
-    .. note::
-
-       An unit test makes sure ``hospital`` declares supported Python versions.
-       Another unit test makes sure ``hospital`` supports ``hospital``'s own
-       development environment.
-       This healthcheck focuses on compatibility of ``hospital`` within
-       environments that use it.
+    The simplest way to reuse this healthcheck is to inherit from it and
+    customize the :py:attr:`distribution_name` attribute.
 
     """
+    #: Distribution name.
+    #: This is a class attribute in order to share it between test methods.
+    distribution_name = 'hospital'
+
+    #: Distribution instance.
+    #: This is a class attribute in order to share it between test methods.
+    #: It is to be populated by :py:meth:`get_distribution` during setup.
+    distribution = None
+
+    def get_distribution(self):
+        """Return distribution instance from :py:attr:`distribution_name`."""
+        return pkg_resources.get_distribution(self.distribution_name)
+
+    def setUp(self):
+        """Setup :py:attr:`distribution`."""
+        self.distribution = self.get_distribution()
+
     def test_python_version(self):
-        """hospital supports environment's Python version."""
-        distribution = pkg_resources.get_distribution('hospital')
-        version = '{0!s}.{1!s}'.format(*sys.version_info[0:2])
-        self.assertTrue(supports_python_version(distribution, version))
+        """Make sure project runs on supported Python version.
+
+        This healthcheck focuses on compatibility of project within
+        environments that actually use it, whereas unit tests take care of:
+
+        * supported Python versions declaration (setup.py, setup.cfg).
+        * project was developed within supported environment(s).
+
+        """
+        hospital.packaging.assert_supported_python_version(self,
+                                                           self.distribution)

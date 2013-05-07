@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests around Python packaging."""
 import pkg_resources
-import sys
 import unittest
 
 import hospital.packaging
@@ -21,6 +20,5 @@ class PythonVersionTestCase(unittest.TestCase):
 
     def test_environment_support(self):
         """hospital supports Python version used to run this test."""
-        version = '{0!s}.{1!s}'.format(*sys.version_info[0:2])
-        self.assertTrue(hospital.packaging.supports_python_version(
-            self.distribution, version))
+        hospital.packaging.assert_supported_python_version(self,
+                                                           self.distribution)

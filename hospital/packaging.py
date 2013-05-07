@@ -5,6 +5,7 @@ This module may be packaged as a standalone library.
 
 """
 import email.parser
+import sys
 
 
 def get_metadata(distribution):
@@ -68,8 +69,15 @@ def get_supported_python_versions(distribution):
     return versions
 
 
-def supports_python_version(distribution, python_version):
+def supports_python_version(distribution, version=None):
     """Return True if ``distribution`` claims support of ``python_version``.
+
+    distribution
+      Distribution object, as returned by ``pkg_resources.get_distribution()``.
+
+    version
+      Python version, as a string. If omitted or `None` (the default), the
+      current Python version is retrieved from ``sys.version_info``.
 
     >>> import pkg_resources
     >>> dist = pkg_resources.get_distribution('hospital')
@@ -80,4 +88,20 @@ def supports_python_version(distribution, python_version):
     False
 
     """
-    return python_version in get_supported_python_versions(distribution)
+    if version is None:
+        version = '{0!s}.{1!s}'.format(*sys.version_info[0:2])
+    return version in get_supported_python_versions(distribution)
+
+
+def assert_supported_python_version(test_case, distribution, version=None):
+    """Assert that distribution ``name`` claims support for Python ``version``.
+
+    distribution
+      Distribution object, as returned by ``pkg_resources.get_distribution()``.
+
+    version
+      Python version, as a string. If omitted or `None` (the default), the
+      current Python version is retrieved from ``sys.version_info``.
+
+    """
+    test_case.assertTrue(supports_python_version(distribution, version))

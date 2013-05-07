@@ -48,7 +48,7 @@ maintainer-clean: distclean
 
 
 test:
-	$(NOSE) --config=etc/nose.cfg --with-doctest hospital tests
+	$(NOSE) --config=etc/nose.cfg --with-doctest --attr="!is_healthcheck" hospital tests
 
 healthcheck:
 	$(NOSE) --config=etc/nose.cfg --attr="is_healthcheck" hospital

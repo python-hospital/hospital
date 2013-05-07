@@ -23,11 +23,13 @@ if __name__ == '__main__':  # Don't run setup() when we import this module.
           version=VERSION,
           description='Health checks and supervision/monitoring libraries.',
           long_description=README,
-          classifiers=['Development Status :: 3 - Alpha',
-                       'License :: OSI Approved :: BSD License',
-                       'Programming Language :: Python :: 2.7',
-                       'Programming Language :: Python :: 2.6',
-                       ],
+          classifiers=[
+              'Development Status :: 3 - Alpha',
+              'License :: OSI Approved :: BSD License',
+              'Programming Language :: Python :: 2.7',
+              'Programming Language :: Python :: 2.6',
+              'Programming Language :: Python :: Implementation :: CPython',
+          ],
           keywords='test unittest diagnosis healthcheck supervision '
                    'monitoring',
           author='Benoît Bryon',

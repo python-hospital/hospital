@@ -50,7 +50,7 @@ test: test-app test-documentation healthcheck
 
 
 test-app:
-	$(NOSE) --config=etc/nose.cfg --with-doctest --attr="!is_healthcheck" hospital tests
+	$(NOSE) --config=etc/nose.cfg --with-doctest --with-coverage --cover-package=hospital --attr="!is_healthcheck" hospital tests
 
 
 healthcheck:

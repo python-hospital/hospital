@@ -1,0 +1,37 @@
+#################################
+Alternatives and related projects
+#################################
+
+This document presents other projects that provide similar or complementary
+functionalities. It focuses on differences with ``hospital``.
+
+
+*******************
+django-health-check
+*******************
+
+`django-health-check`_ provides health checks for the `Django`_ framework.
+
+
+*************
+django-doctor
+*************
+
+`django-doctor`_ provides health checks for the `Django`_ framework.
+
+
+****************
+django-smoketest
+****************
+
+`django-smoketest`_ provides health checks for the `Django`_ framework.
+
+
+.. rubric:: References
+
+.. target-notes::
+
+.. _`Django`: https://djangoproject.com
+.. _`django-health-check`: https://pypi.python.org/pypi/django-health-check
+.. _`django-doctor`: https://pypi.python.org/pypi/django-doctor
+.. _`django-smoketest`: https://pypi.python.org/pypi/django-smoketest

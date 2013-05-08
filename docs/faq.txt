@@ -1,0 +1,75 @@
+###
+FAQ
+###
+
+Here are frequently asked questions.
+
+
+************************************************************
+What is the difference between health checks and unit tests?
+************************************************************
+
+The main difference is the use case.
+
+Unit tests:
+
+* assert implementation internals work as expected.
+* use mocks, fakes, stubs...
+* use test data (data can be destroyed when tests are run).
+* are run on dedicated environments (development, continuous integration...),
+  i.e. they can consume dedicated resources (CPU, memory, bandwidth, ...).
+* are about implementation, features, bugs...
+* are part of development process.
+* are mostly read by development team.
+
+Whereas health checks:
+
+* return status of a running application.
+* use real life configuration (i.e. production) and environment.
+* use real life data, i.e. data matters!
+* are run on live environments (production), i.e. resources usage matter much
+  more!
+* are about environment, networking, configuration...
+* are part of monitoring or supervision.
+* are mostly read by operations team.
+
+As an example:
+
+* unit test: all Python bindings for some database client work as expected:
+  connect, read, write...
+* health check: the running application successfully connects to the database
+  server. If the connection can be established, then everything covered by
+  unit tests is implicitely supposed to work.
+
+That said, health checks and unit tests both perform assertions, in order to
+return some "ok" or "error" binary information to the user.
+
+
+*******************************************************************
+What is the difference between health checks and integration tests?
+*******************************************************************
+
+It is nearly the same answer than `What is the difference between health checks 
+and unit tests?`_ above...
+
+Integration tests make sure some components can work together, in dedicated
+environments, with dummy data and users...
+
+Whereas health checks actually check the status of running applications.
+
+
+*****************************
+Health checks VS smoke tests?
+*****************************
+
+Smoke tests are a kind of health checks.
+
+Smoke tests are light and quick operations that return feedback.
+They are the health checks you usually run (and setup) first.
+
+Then, other health checks can give you more details, so that you get a better
+diagnosis.
+
+When smoke tests return positive feedback (i.e. everything seems alright), it
+may be useless to run deeper tests. This is what ``hospital`` calls a diagnosis
+scenario.

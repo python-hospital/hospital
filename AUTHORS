@@ -2,4 +2,21 @@
 Authors & contributors
 ######################
 
+Inspired by:
+
+* `django-doctor`_, by Jon Lønne <jon@funkbit.no>
+* `django-health-check`_, by Kristian Øllegaard <kristian@kristian.io>
+* `django-smoketest`_, by Anders Pearson <anders@columbia.edu>
+
+Maintainer:
+
 * Benoît Bryon <benoit@marmelune.net>
+
+
+.. rubric:: References
+
+.. target-notes::
+
+.. _`django-health-check`: https://pypi.python.org/pypi/django-health-check
+.. _`django-doctor`: https://pypi.python.org/pypi/django-doctor
+.. _`django-smoketest`: https://pypi.python.org/pypi/django-smoketest

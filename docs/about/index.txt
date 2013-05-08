@@ -1,0 +1,12 @@
+##############
+About hospital
+##############
+
+.. toctree::
+   :titlesonly:
+
+   vision
+   alternatives
+   license
+   authors
+   changelog

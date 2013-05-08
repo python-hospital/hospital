@@ -2,10 +2,14 @@
 hospital: healthchecks for Python
 #################################
 
-* Tools to diagnose Python (supervision, monitoring).
-* Diagnosis scenarios.
-* Built upon unittest.
-* Helpers to fix things (automatically?).
+``hospital`` makes it easy to setup and use health checks in Python.
+
+Health checks are kind of tests applied to running applications and services:
+
+* while developing the application, write health checks ;
+* after a deployment, run health checks to make sure everything went fine ;
+* include health checks in supervision/monitoring tools ;
+* in case of incidents, use health checks to diagnose problems.
 
 
 *******
@@ -37,11 +41,12 @@ Example
            my_provisioner.install(database_library, confirm=True)
 
 
-***********
-Integration
-***********
+*********
+Resources
+*********
 
-* builtin integration with unittest ecosystem: nose, Jenkins...
-* third-party libraries provides reporting tools and diagnoses implementations.
-* django-doctor provides Django views for healthchecks.
-* django-doctor provides a set of useful healthchecks for Django.
+* Documentation: https://hospital.readthedocs.org
+* PyPI page: https://pypi.python.org/pypi/hospital
+* Code repository: https://github.com/python-hospital/hospital
+* Bugtracker: https://github.com/python-hospital/hospital/issues
+* Continuous integration: https://travis-ci.org/python-hospital/hospital

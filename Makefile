@@ -9,7 +9,7 @@ PYTHON = $(shell which python)
 PROJECT = $(shell $(PYTHON) -c "import setup; print setup.NAME")
 BUILDOUT_CFG = $(ROOT_DIR)/etc/buildout.cfg
 BUILDOUT_DIR = $(ROOT_DIR)/lib/buildout
-BUILDOUT_VERSION = 1.7.0
+BUILDOUT_VERSION = 1.7.1
 BUILDOUT_BOOTSTRAP_URL = https://raw.github.com/buildout/buildout/$(BUILDOUT_VERSION)/bootstrap/bootstrap.py
 BUILDOUT_BOOTSTRAP = $(BUILDOUT_DIR)/bootstrap.py
 BUILDOUT_BOOTSTRAP_ARGS = -c $(BUILDOUT_CFG) --version=$(BUILDOUT_VERSION) --distribute buildout:directory=$(ROOT_DIR)
@@ -39,7 +39,6 @@ clean:
 
 distclean: clean
 	rm -rf $(ROOT_DIR)/*.egg-info
-	rm -rf $(ROOT_DIR)/demo/*.egg-info
 
 
 maintainer-clean: distclean
@@ -47,8 +46,40 @@ maintainer-clean: distclean
 	rm -rf $(ROOT_DIR)/lib/
 
 
-test:
+test: test-app test-documentation healthcheck
+
+
+test-app:
 	$(NOSE) --config=etc/nose.cfg --with-doctest --attr="!is_healthcheck" hospital tests
+
 
 healthcheck:
 	$(NOSE) --config=etc/nose.cfg --attr="is_healthcheck" hospital
+
+
+test-documentation:
+	$(NOSE) -c $(ROOT_DIR)/etc/nose.cfg sphinxcontrib.testbuild.tests
+	rm $(ROOT_DIR)/.coverage
+
+
+documentation: sphinx-apidoc sphinx-html
+
+
+# Remove auto-generated API documentation files.
+# Files will be restored during sphinx-build, if "autosummary_generate" option
+# is set to True in Sphinx configuration file.
+sphinx-apidoc-clean:
+	find docs/api/ -type f \! -name "index.txt" -delete
+
+
+sphinx-apidoc: sphinx-apidoc-clean
+	$(BIN_DIR)/sphinx-apidoc --suffix txt --output-dir $(ROOT_DIR)/docs/api $(PROJECT)
+
+
+sphinx-html:
+	if [ ! -d docs/_static ]; then mkdir docs/_static; fi
+	make --directory=docs clean html doctest
+
+
+release:
+	$(BIN_DIR)/fullrelease

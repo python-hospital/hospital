@@ -1,0 +1,103 @@
+######
+Vision
+######
+
+``hospital`` makes it easy to setup and use health checks in `Python`_.
+
+
+*******************
+Made for operations
+*******************
+
+Once applications or services have been installed and configured, how to
+figure out if everything goes fine? Is the configuration ok? Is environment
+missing some component? Operations need feedback.
+**Health checks are part of monitoring and supervision.**
+
+``hospital`` provides tools to retrieve on demand feedback about application
+status.
+
+From smoke tests to scenarios, the goal is to help operations and developers
+to monitor applications.
+
+
+*************
+By developers
+*************
+
+Applications and services are made of software, which is made by developers.
+Developers are the very first ones who are given the opportunity to run the
+software. They do need health checks just like they need unit tests or
+integration tests. Moreover, developers are the ones who know what their
+software need: environment, configuration... Developers are the ones who can
+write useful and accurate health checks.
+**Health checks are part of the development process.**
+
+``hospital`` is a library that helps developers write health checks.
+
+
+*************************************
+Focus on what is actually going wrong
+*************************************
+
+How many times have you been searching for a bug when the problem was
+configuration? How many times have you been searching a problem in
+configuration when the database server was down for some reason?
+
+A good overview of what is going wrong, including environment and configuration
+concerns, helps operations and developers focus on the right symptoms.
+
+``hospital`` provides human-readable and robot-parseable output.
+
+
+******************************
+Quick checks, full diagnostics
+******************************
+
+First, operations want to get feedback quickly. If everything is ok, there is
+no need to trigger deeper checks.
+
+Then, when smoke tests reveal anomalies, operations and developers need more
+information in order to figure out what is going wrong.
+
+From smoke tests to diagnostic scenarios, ``hospital`` helps users to provide
+the right feedback in any situation.
+
+
+********************************
+A general-purpose Python library
+********************************
+
+``hospital`` is a general-purpose Python library. It means that it does not
+target specific frameworks. Other projects do, and they can use ``hospital``.
+
+
+**************
+Keep it simple
+**************
+
+``hospital`` provides base tools for health checks. As an example, the
+intention is not to provide a full-featured GUI for users, but rather to
+provide tools to easily discover health checks, run them, and return parseable
+output. Other projects can be built upon ``hospital``.
+
+
+*******************************************
+A place to share and promote best practices
+*******************************************
+
+`python-hospital`_ has been created as a place where developers can converge,
+meet, discuss, share experience or tools.
+
+``hospital`` is part of ``python-hospital``. It has been created to focus on
+general-purpose Python features. One of the very first step is to collect
+such features from several projects that share similar goals.
+See :doc:`alternatives` for details.
+
+
+.. rubric:: References
+
+.. target-notes::
+
+.. _`Python`: http://python.org
+.. _`python-hospital`: https://github.com/python-hospital

@@ -1,0 +1,34 @@
+hospital Package
+================
+
+:mod:`hospital` Package
+-----------------------
+
+.. automodule:: hospital.__init__
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`healthcheck` Module
+-------------------------
+
+.. automodule:: hospital.healthcheck
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`packaging` Module
+-----------------------
+
+.. automodule:: hospital.packaging
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    hospital.healthchecks
+

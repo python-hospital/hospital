@@ -1,0 +1,7 @@
+hospital
+========
+
+.. toctree::
+   :maxdepth: 4
+
+   hospital

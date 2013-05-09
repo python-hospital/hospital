@@ -3,7 +3,8 @@
 import pkg_resources
 import unittest
 
-import hospital.packaging
+from hospital.utils.packaging import (assert_supported_python_version,
+                                      get_supported_python_versions)
 
 
 class PythonVersionTestCase(unittest.TestCase):
@@ -14,11 +15,9 @@ class PythonVersionTestCase(unittest.TestCase):
 
     def test_supported_versions_declaration(self):
         """hospital distribution declares supported Python versions."""
-        versions = hospital.packaging.get_supported_python_versions(
-            self.distribution)
+        versions = get_supported_python_versions(self.distribution)
         self.assertTrue(versions)
 
     def test_environment_support(self):
-        """hospital supports Python version used to run this test."""
-        hospital.packaging.assert_supported_python_version(self,
-                                                           self.distribution)
+        """hospital claims support for Python version used to run this test."""
+        assert_supported_python_version(self, self.distribution)

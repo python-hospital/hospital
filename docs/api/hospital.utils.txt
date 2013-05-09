@@ -1,0 +1,19 @@
+utils Package
+=============
+
+:mod:`utils` Package
+--------------------
+
+.. automodule:: hospital.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`packaging` Module
+-----------------------
+
+.. automodule:: hospital.utils.packaging
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

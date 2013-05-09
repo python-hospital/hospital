@@ -25,10 +25,18 @@ hospital Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`predictable` Module
+-------------------------
+
+.. automodule:: hospital.predictable
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Subpackages
 -----------
 
 .. toctree::
 
-    hospital.healthchecks
+    hospital.utils
 

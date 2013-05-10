@@ -17,6 +17,14 @@ hospital Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`loading` Module
+---------------------
+
+.. automodule:: hospital.loading
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`packaging` Module
 -----------------------
 

@@ -1,8 +1,13 @@
 Changelog
 =========
 
-0.1 (unreleased)
+0.1 (2013-05-11)
 ----------------
 
-- Feature #1: introduced HealthCheck class, imported from django-doctor.
+- Feature #6: added support for TravisCI continuous integration
+- Feature #5: introduced documentation
+- Feature #4: imported HealthCheckLoader from django-doctor.
+- Feature #3: introduced DistributionHealthCheck.
+- Feature #2: introduced PredictableHealthCheck.
+- Feature #1: imported HealthCheck from django-doctor.
 - Initialized project

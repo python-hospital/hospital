@@ -12,6 +12,16 @@ django-health-check
 
 `django-health-check`_ provides health checks for the `Django`_ framework.
 
+Discovery, loading
+==================
+
+Health checks instances need to be registered in order to be loaded. The
+registration is performed in a similar manner than admin classes of Django's
+builtin administration application.
+
+`hospital` is inspired by unittest and related tools, and so is discovery and
+loading.
+
 
 *************
 django-doctor

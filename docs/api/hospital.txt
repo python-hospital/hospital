@@ -25,6 +25,14 @@ hospital Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`networking` Module
+------------------------
+
+.. automodule:: hospital.networking
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`packaging` Module
 -----------------------
 

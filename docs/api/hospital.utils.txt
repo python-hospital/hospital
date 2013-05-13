@@ -9,6 +9,14 @@ utils Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`networking` Module
+------------------------
+
+.. automodule:: hospital.utils.networking
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`packaging` Module
 -----------------------
 

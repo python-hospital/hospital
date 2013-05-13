@@ -4,6 +4,7 @@ Changelog
 0.2 (unreleased)
 ----------------
 
+- Bug #9: Fixed examples in README.
 - Feature #8: introduced PingHealthCheck: make sure some host responds to ping.
 - Feature #7: added tests around hospital's Python API.
 

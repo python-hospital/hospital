@@ -4,41 +4,71 @@ hospital: healthchecks for Python
 
 ``hospital`` makes it easy to setup and use health checks in Python.
 
-Health checks are kind of tests applied to running applications and services:
+Health checks are kind of tests applied to running applications and services.
 
-* while developing the application, write health checks ;
-* after a deployment, run health checks to make sure everything went fine ;
-* include health checks in supervision/monitoring tools ;
-* in case of incidents, use health checks to diagnose problems.
+**********
+Quickstart
+**********
 
+Write health checks
+===================
 
-*******
-Example
-*******
+During development, write health checks...
 
-.. code-block:: python
+Inherit from :py:class:`hospital.HealthCheck` and write health checks as you
+would write tests, i.e. using assertions:
+
+.. doctest::
 
    from hospital import HealthCheck
 
-   class DatabaseHealthCheck(HealthCheck):
-       def test_open_connection(self):
-           """Can open connection to database."""
- 
-       def test_ping_host(self):
-           """Can ping database host."""
+   class HelloWorldHealthCheck(HealthCheck):
+       """A fake health check that always passes."""
+       def test_hello_world(self):
+           """'Hello world' is a string (always passes)."""
+           self.assertTrue(isinstance('Hello world', basestring))
 
-       def test_driver(self):
-           """Database's client library for Python can be imported."""
+.. note::
 
-       def diagnose_database_connection(self):
-           """Can connect to database."""
-           self.assertAny(self.test_open_connection,
-   		       self.test_ping_host,
-   		       self.test_driver)
+   :py:class:`hospital.HealthCheck` from :py:class:`unittest.TestCase`.
 
-       def fix_database_driver(self):
-           """Trigger installation of database library."""
-           my_provisioner.install(database_library, confirm=True)
+Or customize some builtins:
+
+.. doctest::
+
+   from hospital.networking import PingHealthCheck
+
+   class LocalNetworkHealthCheck(PingHealthCheck):
+       """Make sure Python can use local network."""
+       host = 'localhost'
+
+Run health checks
+=================
+
+After a deployment, run health checks to make sure everything went fine.
+
+With nose (here we run health checks of hospital project):
+
+.. code-block:: sh
+
+   nosetests --no-path-adjustment --all-modules --attr="is_healthcheck"  hospital
+
+.. note::
+
+   Some third-party projects expose health checks on HTTP service, returning
+   an HTTP 200 in case of success, or an HTTP 500 in case of any failure.
+   See :doc:`about/alternatives`.
+
+
+Plug in supervision, monitoring
+===============================
+
+Include health checks in supervision/monitoring tools.
+
+Diagnose
+========
+
+In case of incidents, use health checks to diagnose problems.
 
 
 *********

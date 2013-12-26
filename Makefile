@@ -24,6 +24,7 @@ develop: directories virtualenv bin-dir dev-environment
 directories:
 	mkdir -p $(LIB_DIR)
 	mkdir -p $(DATA_DIR)
+	mkdir -p $(ROOT_DIR)/docs/_static
 
 
 virtualenv:

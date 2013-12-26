@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""hospital provides supervision/monitoring utilities for Python projects."""
+"""Health checks for Python."""
 import pkg_resources
 
 
@@ -7,9 +7,5 @@ import pkg_resources
 __version__ = pkg_resources.get_distribution(__package__).version
 
 
-# API.
-import hospital.healthcheck
-
-
-#: Shortcut to :py:class:`hospital.healthcheck.HealthCheck`.
-HealthCheck = hospital.healthcheck.HealthCheck
+# API shortcuts.
+from hospital.api import *  # NoQA

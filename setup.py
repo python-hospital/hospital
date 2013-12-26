@@ -30,7 +30,7 @@ KEYWORDS = ['diagnosis',
             'supervision',
             'testing']
 PACKAGES = [NAME.replace('-', '_')]
-REQUIREMENTS = ['setuptools']
+REQUIREMENTS = ['setuptools', 'requests']
 if IS_PYTHON2:
     REQUIREMENTS.extend(['mock'])
 ENTRY_POINTS = {}

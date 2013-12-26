@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Predictable health check, i.e. they always have the expected behaviour."""
-from hospital import HealthCheck
+"""Predictable health checks, i.e. they always have the expected behaviour."""
+import unittest
+
+from hospital.core import healthcheck
 
 
-class PredictableHealthCheck(HealthCheck):
-    """Health check that give predictable results.
+@healthcheck
+class ForeverPassingHealthCheck(unittest.TestCase):
+    """Health check that forever passes.
 
     Useful to check that health checks can be run, discovered, or to check
     their output.

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Healthchecks related to packaging."""
+"""Healthchecks related to Python packaging."""
 import pkg_resources
+import unittest
 
-from hospital import HealthCheck
-from hospital.utils.packaging import assert_supported_python_version
+from hospital.core import healthcheck
+from hospital.assertions.packaging import assert_supported_python_version
 
 
-class DistributionHealthCheck(HealthCheck):
+@healthcheck
+class DistributionHealthCheck(unittest.TestCase):
     """Several checks related to project's distribution.
 
     The simplest way to reuse this healthcheck is to inherit from it and
@@ -40,4 +42,4 @@ class DistributionHealthCheck(HealthCheck):
         * project was developed within supported environment(s).
 
         """
-        assert_supported_python_version(self, self.distribution)
+        assert_supported_python_version(self.distribution)

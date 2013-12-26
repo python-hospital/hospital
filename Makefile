@@ -42,6 +42,7 @@ bin-dir:
 
 clean:
 	find $(ROOT_DIR)/ -name "*.pyc" -delete
+	find $(ROOT_DIR)/ -name "__pycache__" -delete
 	find $(ROOT_DIR)/ -name ".noseids" -delete
 
 

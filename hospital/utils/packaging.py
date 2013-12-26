@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Utilities related to packaging.
+"""Utilities related to Python packaging.
 
 This module may be packaged as a standalone library.
 
@@ -94,17 +94,3 @@ def supports_python_version(distribution, version=None):
     if version is None:
         version = '{0!s}.{1!s}'.format(*sys.version_info[0:2])
     return version in get_supported_python_versions(distribution)
-
-
-def assert_supported_python_version(test_case, distribution, version=None):
-    """Assert that ``distribution`` claims support for Python ``version``.
-
-    distribution
-      Distribution object, as returned by ``pkg_resources.get_distribution()``.
-
-    version
-      Python version, as a string. If omitted or `None` (the default), the
-      current Python version is retrieved from ``sys.version_info``.
-
-    """
-    test_case.assertTrue(supports_python_version(distribution, version))

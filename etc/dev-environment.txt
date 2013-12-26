@@ -1,0 +1,3 @@
+tox
+Sphinx
+zest.releaser

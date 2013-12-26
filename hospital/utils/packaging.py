@@ -38,8 +38,11 @@ def get_classifiers(distribution):
     >>> import pkg_resources
     >>> dist = pkg_resources.get_distribution('hospital')
     >>> from hospital.utils.packaging import get_classifiers
-    >>> get_classifiers(dist)
-    ['Development Status :: 3 - Alpha', 'License :: OSI Approved :: BSD License', 'Programming Language :: Python :: 2.6', 'Programming Language :: Python :: 2.7', 'Programming Language :: Python :: Implementation :: CPython']
+    >>> print('\\n'.join(get_classifiers(dist)))
+    Development Status :: 3 - Alpha
+    License :: OSI Approved :: BSD License
+    Programming Language :: Python :: 2.7
+    Programming Language :: Python :: 3.3
 
     """
     classifiers = get_metadata(distribution)['Classifier']
@@ -54,7 +57,7 @@ def get_supported_python_versions(distribution):
     >>> dist = pkg_resources.get_distribution('hospital')
     >>> from hospital.utils.packaging import get_supported_python_versions
     >>> get_supported_python_versions(dist)
-    ['2.6', '2.7']
+    ['2.7', '3.3']
 
     """
     classifiers = get_classifiers(distribution)
@@ -82,7 +85,7 @@ def supports_python_version(distribution, version=None):
     >>> import pkg_resources
     >>> dist = pkg_resources.get_distribution('hospital')
     >>> from hospital.utils.packaging import supports_python_version
-    >>> supports_python_version(dist, '2.6')
+    >>> supports_python_version(dist, '3.3')
     True
     >>> supports_python_version(dist, '2.5')
     False

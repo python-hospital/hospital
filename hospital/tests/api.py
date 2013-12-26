@@ -7,4 +7,4 @@ class APITestCase(unittest.TestCase):
     """Check hospital's API."""
     def test_healthcheck_class(self):
         """``from hospital import HealthCheck works.``"""
-        from hospital import HealthCheck
+        from hospital import HealthCheck  # NoQA

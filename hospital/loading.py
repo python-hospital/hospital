@@ -20,11 +20,9 @@ class HealthCheckLoader(unittest.TestLoader):
     def is_health_check(self, value):
         """Return True if ``value`` is an health check.
 
-        Proxy to :py:attr:``
         Tests ``is_healthcheck`` attribute of ``value``.
 
         """
-
         try:
             return value.is_healthcheck
         except AttributeError:
@@ -86,19 +84,20 @@ class HealthCheckLoader(unittest.TestLoader):
         class_name = parts[0]
         try:
             class_obj = getattr(module_obj, class_name)
-        except AttributeError as class_exception:
+        except AttributeError:
             raise ImportError("Couldn't load '%s'" % name)
         if not self.is_health_check(class_obj):
-            raise  ImportError("'%s' is not a health check" % name)
+            raise ImportError("'%s' is not a health check" % name)
         try:
             method_name = parts[1]
         except IndexError:
             return self.loadTestsFromTestCase(class_obj)
         else:
             try:
-                method_obj = getattr(class_obj, method_name)
+                getattr(class_obj, method_name)
             except AttributeError:
-                raise  AttributeError("'%s' is not a health check method" % name)
+                raise AttributeError(
+                    "'{0}' is not a health check method".format(name))
             return unittest.TestSuite([class_obj(method_name)])
 
     def loadTestsFromNames(self, names, module=None):

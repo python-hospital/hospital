@@ -1,5 +1,5 @@
 # Local binaries.
-/bin/
+/bin
 
 # Libraries.
 /lib/
@@ -11,6 +11,13 @@
 *.pyc
 *.pyo
 *.egg-info
+
+# Tox files.
+/.tox/
+
+# Virtualenv files (created by tox).
+/build/
+/dist/
 
 # Editors' temporary buffers.
 .*.swp

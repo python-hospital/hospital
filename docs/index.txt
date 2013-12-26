@@ -1,4 +1,4 @@
-.. include:: ../README
+.. include:: ../README.rst
 
 
 ********
@@ -11,9 +11,8 @@ Contents
 
    faq
    install
-   api/index
    about/index
-   contribute/index
+   contribute
 
 
 ******************

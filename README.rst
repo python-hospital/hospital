@@ -13,34 +13,30 @@ Quickstart
 Write health checks
 ===================
 
-During development, write health checks...
+During development, inherit from :py:class:`hospital.HealthCheck` and write
+health checks as you would write tests, i.e. using assertions:
 
-Inherit from :py:class:`hospital.HealthCheck` and write health checks as you
-would write tests, i.e. using assertions:
+.. code:: python
 
-.. doctest::
+   import hospital
 
-   from hospital import HealthCheck
+   class DocumentationHealthCheck(hospital.HealthCheck):
+       """Check `hospital` online documentation."""
+       def test_ping(self):
+           """`hospital` documentation server responds to ping."""
+           hostname = 'hospital.readthedocs.org'
+           hospital.assert_ping(hostname)
 
-   class HelloWorldHealthCheck(HealthCheck):
-       """A fake health check that always passes."""
-       def test_hello_world(self):
-           """'Hello world' is a string (always passes)."""
-           self.assertTrue(isinstance('Hello world', basestring))
+       def test_http_200(self):
+           """`hospital` online documentation returns HTTP 200."""
+           url = 'http://hospital.readthedocs.org/en/0.1/'
+	   hospital.assert_http_response(url, status_code=200)
 
 .. note::
 
-   :py:class:`hospital.HealthCheck` from :py:class:`unittest.TestCase`.
-
-Or customize some builtins:
-
-.. doctest::
-
-   from hospital.networking import PingHealthCheck
-
-   class LocalNetworkHealthCheck(PingHealthCheck):
-       """Make sure Python can use local network."""
-       host = 'localhost'
+   :class:`~hospital.healthcheck.HealthCheck` is a subclass of
+   :class:`unittest.TestCase` with an
+   :attr:`~hospital.healthcheck.HealthCheck.is_healthcheck` attribute.
 
 Run health checks
 =================
@@ -49,7 +45,7 @@ After a deployment, run health checks to make sure everything went fine.
 
 With nose (here we run health checks of hospital project):
 
-.. code-block:: sh
+.. code:: sh
 
    nosetests --no-path-adjustment --all-modules --attr="is_healthcheck"  hospital
 

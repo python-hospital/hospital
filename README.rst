@@ -16,8 +16,8 @@ Write health checks
 Write health checks just like you would write tests. The main difference is
 their scope: they check "production" facts instead of mocks/fakes/dummies.
 
-**Health checks are special kind of tests. Use :func:`hospital.healthcheck`
-decorator to differenciate health checks from tests.**
+Health checks are special kind of tests. Use :func:`~hospital.core.healthcheck`
+decorator to differenciate health checks from tests.
 
 Just like tests, health checks can be simple functions that perform assertions:
 
@@ -59,8 +59,8 @@ Run health checks
 Run health checks to make sure everything is ok. As an example, run health
 checks after a deployment to verify configuration, services...
 
-**Health checks are tests having a ``is_healthcheck`` attribute which is
-``True``.** Let's use this feature to capture and run the tests.
+Health checks are tests having a ``is_healthcheck`` attribute which is
+``True``. Let's use this feature to capture and run the tests.
 
 With `nose` (here we run health checks of `hospital` project):
 

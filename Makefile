@@ -75,7 +75,7 @@ test-documentation:
 
 
 sphinx:
-	make --directory=docs clean html doctest
+	make --directory=docs clean html
 
 
 documentation: sphinx

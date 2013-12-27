@@ -1,0 +1,32 @@
+########
+Core API
+########
+
+.. py:module:: hospital.core
+
+Core API is mostly made of :func:`healthcheck` function.
+
+
+***********
+healthcheck
+***********
+
+.. autofunction:: healthcheck
+
+
+***********
+HealthCheck
+***********
+
+.. autoclass:: HealthCheck
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+
+**************
+is_healthcheck
+**************
+
+.. autofunction:: is_healthcheck

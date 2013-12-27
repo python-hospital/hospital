@@ -1,0 +1,27 @@
+############
+HealthChecks
+############
+
+`hospital` provides a set of health check suites you can customize.
+
+
+*********
+Packaging
+*********
+
+.. automodule:: hospital.healthchecks.packaging
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+
+***********
+Predictable
+***********
+
+.. automodule:: hospital.healthchecks.predictable
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource

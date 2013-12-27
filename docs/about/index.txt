@@ -2,6 +2,8 @@
 About hospital
 ##############
 
+This section is about the `hospital` project itself.
+
 .. toctree::
    :titlesonly:
 

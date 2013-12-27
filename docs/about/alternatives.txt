@@ -6,14 +6,22 @@ This document presents other projects that provide similar or complementary
 functionalities. It focuses on differences with ``hospital``.
 
 
-*******************
+***************************
+The python-hospital project
+***************************
+
+`hospital` is part of the `python-hospital`_ project. `hospital` contains the
+general Python layer, and other projects focus on more specific needs.
+
+
+**********
+For Django
+**********
+
 django-health-check
-*******************
+===================
 
 `django-health-check`_ provides health checks for the `Django`_ framework.
-
-Discovery, loading
-==================
 
 Health checks instances need to be registered in order to be loaded. The
 registration is performed in a similar manner than admin classes of Django's
@@ -22,25 +30,27 @@ builtin administration application.
 `hospital` is inspired by unittest and related tools, and so is discovery and
 loading.
 
-
-*************
 django-doctor
-*************
+=============
 
 `django-doctor`_ provides health checks for the `Django`_ framework.
 
+`hospital`'s features, such as :class:`~hospital.core.HealthCheck`, were first
+introduced in `django-doctor`. But some features were not specific to `Django`,
+and `hospital` was created. See https://github.com/funkbit/django-doctor/pull/2
+and https://github.com/funkbit/django-doctor/pull/4.
 
-****************
 django-smoketest
-****************
+================
 
 `django-smoketest`_ provides health checks for the `Django`_ framework.
 
 
-.. rubric:: References
+.. rubric:: Notes & references
 
 .. target-notes::
 
+.. _`python-hospital`: https://github.com/python-hospital
 .. _`Django`: https://djangoproject.com
 .. _`django-health-check`: https://pypi.python.org/pypi/django-health-check
 .. _`django-doctor`: https://pypi.python.org/pypi/django-doctor

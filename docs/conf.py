@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """hospital documentation build configuration file.
 
-Created by diecutter on 2013-05-07.
-
 This file is execfile()d with the current directory set to its containing dir.
 
 .. note::
@@ -30,10 +28,10 @@ import re
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = [
-    'sphinx.ext.doctest',
-    'sphinx.ext.autodoc',
-]
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.autosummary',
+              'sphinx.ext.doctest',
+              'sphinx.ext.intersphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -186,6 +184,13 @@ html_sidebars = {
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = u'{project}doc'.format(project=project_slug)
+
+
+# -- Options for sphinx.ext.intersphinx ---------------------------------------
+
+intersphinx_mapping = {
+    'python': ('http://docs.python.org/3', None),
+}
 
 
 # -- Options for LaTeX output --------------------------------------------------

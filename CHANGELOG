@@ -4,9 +4,31 @@ Changelog
 0.2 (unreleased)
 ----------------
 
-- Feature #10: mentioned project's IRC channel in documentation.
+Documentation review, API refactoring, addition of some assertions.
+
+- Feature #17: introduced ``assert_http_response`` assertion.
+
+- Feature #16: introduced ``assert_supported_python_version`` assertion.
+
+- Feature #15: exposed API at root of ``hospital`` package. Items not exposed
+  in this root API may be moved without notice, whereas root API is tested and
+  refactoring will be documented. 
+
+- Feature #14: introduced ``healthcheck`` decorator. Deprecates former
+  ``HealtCheck`` base class (not removed in this version).
+
+- Feature #13: dropped support of Python 2.6
+
+- Feature #12: introduced support of Python 3.3
+
+- Feature #11: project has mailing-list pythonhospital@librelist.com
+
+- Feature #10: project has IRC channel #python-hospital on freenode.
+
 - Bug #9: Fixed examples in README.
-- Feature #8: introduced PingHealthCheck: make sure some host responds to ping.
+
+- Feature #8: introduced ``assert_ping`` assertion.
+
 - Feature #7: added tests around hospital's Python API.
 
 

@@ -1,0 +1,38 @@
+##########
+Assertions
+##########
+
+`hospital` provides a set of assertions for use in health checks.
+
+
+****
+HTTP
+****
+
+.. automodule:: hospital.assertions.http
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+
+**********
+Networking
+**********
+
+.. automodule:: hospital.assertions.networking
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+
+*********
+Packaging
+*********
+
+.. automodule:: hospital.assertions.packaging
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource

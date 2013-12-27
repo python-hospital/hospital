@@ -4,6 +4,24 @@ FAQ
 
 Here are frequently asked questions.
 
+.. contents::
+
+
+****************************
+Why health checks are tests?
+****************************
+
+Health checks and unit tests look like each other: they both perform
+assertions, in order to return some "ok" or "error" binary information to the
+user.
+
+Moreover, in Python ecosystem, many tools deal with tests, and community is
+used to testing.
+
+So, in order to make health checks easy and powerful, they were created as
+a special kind of tests. Moreover, this design requires small code, since most
+implementations already exist.
+
 
 ************************************************************
 What is the difference between health checks and unit tests?
@@ -37,12 +55,10 @@ As an example:
 
 * unit test: all Python bindings for some database client work as expected:
   connect, read, write...
+
 * health check: the running application successfully connects to the database
   server. If the connection can be established, then everything covered by
   unit tests is implicitely supposed to work.
-
-That said, health checks and unit tests both perform assertions, in order to
-return some "ok" or "error" binary information to the user.
 
 
 *******************************************************************
@@ -71,5 +87,6 @@ Then, other health checks can give you more details, so that you get a better
 diagnosis.
 
 When smoke tests return positive feedback (i.e. everything seems alright), it
-may be useless to run deeper tests. This is what ``hospital`` calls a diagnosis
-scenario.
+may be useless to run deeper tests. Else, if some smoke test returns negative
+feedback (there is something wrong), then additional health checks may provide
+more details. This is what `hospital` calls a diagnosis scenario.

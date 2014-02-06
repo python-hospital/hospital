@@ -13,7 +13,7 @@ Contents
    install
    api/index
    about/index
-   contribute
+   contributing
 
 
 ******************

@@ -1,5 +1,0 @@
-tox
-Sphinx
-zest.releaser
-# Install hospital in development mode.
--e ./

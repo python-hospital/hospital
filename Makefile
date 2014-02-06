@@ -53,7 +53,7 @@ readme:
 	rst2html.py --exit-status=2 README.rst var/docs/README.html
 
 
-documentation: sphinx
+documentation: sphinx readme
 
 
 release:

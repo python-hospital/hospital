@@ -6,7 +6,7 @@ This project is open-source, published under BSD license.
 See :doc:`/about/license` for details.
 
 If you want to install a development environment, you should go to
-:doc:`/contribute` documentation.
+:doc:`/contributing` documentation.
 
 Install the package with your favorite Python installer. As an example, with
 pip:

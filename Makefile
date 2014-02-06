@@ -1,7 +1,7 @@
 # Reference card for usual actions in development environment.
 #
 # For standard installation of hospital as a library, see INSTALL.
-# For details about hospital's development environment, see CONTRIBUTE.rst.
+# For details about hospital's development environment, see CONTRIBUTING.rst.
 
 
 develop:

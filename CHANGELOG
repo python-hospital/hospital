@@ -9,6 +9,9 @@ Changelog
   virtualenv, virtualenvwrapper or whatever. Added documentation about the
   Makefile scope and usage.
 
+- Bugfix #18: README can be rendered as HTML with `docutils`' ``rst2html.py``.
+  Fixes PyPI information page.
+
 
 0.2 (2013-12-27)
 ----------------
@@ -34,7 +37,7 @@ Documentation review, API refactoring, addition of some assertions.
 
 - Feature #10: project has IRC channel #python-hospital on freenode.
 
-- Bug #9: Fixed examples in README.
+- Bugfix #9: Fixed examples in README.
 
 - Feature #8: introduced ``assert_ping`` assertion.
 

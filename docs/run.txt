@@ -1,0 +1,25 @@
+#################
+Run health checks
+#################
+
+Run health checks to make sure everything is ok. As an example, run health
+checks after a deployment to verify configuration, services...
+
+Health checks are tests having a ``is_healthcheck`` attribute which is
+``True``. Let's use this feature to capture and run the tests.
+
+With `nose` (here we run health checks of `hospital` project):
+
+.. code:: sh
+
+   nosetests --no-path-adjustment --all-modules --attr="is_healthcheck" hospital
+
+.. tip::
+
+   You may want to skip health checks when you run unit/functional/integration
+   tests. With `nose`, it could be:
+
+   .. code:: sh
+
+      nosetests --no-path-adjustment --all-modules --attr="!is_healthcheck" hospital
+

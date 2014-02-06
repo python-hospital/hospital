@@ -11,6 +11,8 @@ Contents
 
    faq
    install
+   write
+   run
    api/index
    about/index
    contributing

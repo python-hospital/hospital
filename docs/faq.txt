@@ -27,8 +27,6 @@ implementations already exist.
 What is the difference between health checks and unit tests?
 ************************************************************
 
-The main difference is the use case.
-
 Unit tests:
 
 * assert implementation internals work as expected.
@@ -45,7 +43,7 @@ Whereas health checks:
 * return status of a running application.
 * use real life configuration (i.e. production) and environment.
 * use real life data, i.e. data matters!
-* are run on live environments (production), i.e. resources usage matter much
+* are run on live environments (production), i.e. resources usage matters much
   more!
 * are about environment, networking, configuration...
 * are part of monitoring or supervision.

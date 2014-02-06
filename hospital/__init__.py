@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Health checks for Python."""
+"""Hospital is a framework to write health checks around running services."""
 import pkg_resources
 
 

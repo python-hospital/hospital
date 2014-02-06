@@ -4,7 +4,10 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Feature #25: the Makefile in project's repository no longer creates a
+  virtualenv. Developers setup the environment as they like, i.e. using
+  virtualenv, virtualenvwrapper or whatever. Added documentation about the
+  Makefile scope and usage.
 
 
 0.2 (2013-12-27)

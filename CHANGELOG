@@ -9,6 +9,8 @@ Changelog
   virtualenv, virtualenvwrapper or whatever. Added documentation about the
   Makefile scope and usage.
 
+- Feature #19: reviewed contributor guide, added branching policy.
+
 - Bugfix #18: README can be rendered as HTML with `docutils`' ``rst2html.py``.
   Fixes PyPI information page.
 

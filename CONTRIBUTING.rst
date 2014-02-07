@@ -2,6 +2,41 @@
 Contributing to hospital
 ########################
 
+This document provides guidelines for people who want to contribute to the
+project.
+
+
+**************
+Create tickets
+**************
+
+Please use `hospital bugtracker`_ **before** starting some work:
+
+* check if the bug or feature request has already been filed. It may have been
+  answered too!
+
+* else create a new ticket.
+
+* if you plan to contribute, tell us, so that we are given an opportunity to
+  give feedback as soon as possible.
+
+* Then, in your commit messages, reference the ticket with some
+  ``refs #TICKET-ID`` syntax.
+
+
+******************
+Use topic branches
+******************
+
+* Work in branches.
+
+* Prefix your branch with the ticket ID corresponding to the issue. As an
+  example, if you are working on ticket #23 which is about contribute
+  documentation, name your branch like ``23-contribute-doc``.
+
+* If you work in a development branch and want to refresh it with changes from
+  master, please `rebase`_ or `merge-based rebase`_, i.e. do not merge master.
+
 
 ***********
 Fork, clone
@@ -41,6 +76,9 @@ environment:
 
 .. target-notes::
 
+.. _`hospital bugtracker`: https://github.com/python-hospital/hospital/issues
+.. _`rebase`: http://git-scm.com/book/en/Git-Branching-Rebasing
+.. _`merge-based rebase`: http://tech.novapost.fr/psycho-rebasing-en.html
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`tox`: https://pypi.python.org/pypi/tox/
 .. _`Sphinx`: https://pypi.python.org/pypi/Sphinx/

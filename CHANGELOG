@@ -11,6 +11,8 @@ Changelog
 
 - Feature #19: reviewed contributor guide, added branching policy.
 
+- Feature #24: added note about project's status in documentation.
+
 - Bugfix #18: README can be rendered as HTML with `docutils`' ``rst2html.py``.
   Fixes PyPI information page.
 

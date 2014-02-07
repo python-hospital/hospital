@@ -5,6 +5,7 @@ env:
   - TOXENV=flake8
   - TOXENV=healthcheck
   - TOXENV=sphinx
+  - TOXENV=readme
 install:
   - pip install tox
 script:

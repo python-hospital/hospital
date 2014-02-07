@@ -13,7 +13,8 @@ IS_PYTHON2 = sys.version_info[0] == 2
 
 
 NAME = 'hospital'
-DESCRIPTION = 'Healthchecks for Python.'
+DESCRIPTION = 'Framework around health checks, smoke tests and diagnoses: ' \
+              'monitor your applications and services at runtime.'
 README = open(os.path.join(here, 'README.rst')).read()
 VERSION = open(os.path.join(here, 'VERSION')).read().strip()
 AUTHOR = u'Benoît Bryon'
@@ -26,6 +27,7 @@ CLASSIFIERS = ['Development Status :: 3 - Alpha',
 KEYWORDS = ['diagnosis',
             'healthcheck',
             'monitoring',
+            'probe',
             'smoketest',
             'supervision',
             'testing']

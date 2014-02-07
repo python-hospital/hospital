@@ -19,6 +19,18 @@ Health checks are kind of tests, applied to running applications and services:
 * in case of incidents, use healthchecks to diagnose problems.
 
 
+**************
+Project status
+**************
+
+`hospital` is not full-featured yet. Some important features are in the
+`roadmap <https://github.com/python-hospital/hospital/issues/milestones>`_.
+See also `vision
+<http://hospital.readthedocs.org/en/latest/about/vision.html>`_.
+
+Of course, any ideas, feedback and help are welcome :)
+
+
 *********
 Resources
 *********

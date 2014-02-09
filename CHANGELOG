@@ -1,8 +1,15 @@
 Changelog
 =========
 
+This document describes changes between past releases. For information about
+future releases, check `milestones`_ and :doc:`/about/vision`.
+
+
 0.3 (unreleased)
 ----------------
+
+Documentation review and development environment refactoring: let's try to
+simplify usage and development of `hospital`.
 
 - Feature #25: the Makefile in project's repository no longer creates a
   virtualenv. Developers setup the environment as they like, i.e. using
@@ -10,6 +17,8 @@ Changelog
   Makefile scope and usage.
 
 - Feature #19: reviewed contributor guide, added branching policy.
+
+- Feature #21: reviewed API documentation.
 
 - Bugfix #18: README can be rendered as HTML with `docutils`' ``rst2html.py``.
   Fixes PyPI information page.
@@ -56,3 +65,10 @@ Documentation review, API refactoring, addition of some assertions.
 - Feature #2: introduced PredictableHealthCheck.
 - Feature #1: imported HealthCheck from django-doctor.
 - Initialized project
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`milestones`: https://github.com/python-hospital/hospital/issues/milestones

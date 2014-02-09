@@ -8,14 +8,11 @@ Contents
 .. toctree::
    :maxdepth: 2
    :titlesonly:
+   :includehidden:
 
-   faq
+   overview
    install
-   write
-   healthcheck-decorator
-   assertions
-   builtin-healthchecks
-   run
+   api/index
    about/index
    contributing
 

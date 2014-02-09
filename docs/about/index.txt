@@ -9,6 +9,7 @@ This section is about the `hospital` project itself.
 
    vision
    alternatives
+   lexicon
    license
    authors
    changelog

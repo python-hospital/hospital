@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Healthchecks: harmless tests (PROD compatible).
-
-Health checks are meant to run on any live instance, such as a PROD
-environment. They are part of the monitoring/supervision toolkit.
-
-"""
+"""Core functions."""
 import unittest
 
 

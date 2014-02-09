@@ -9,7 +9,16 @@ import unittest
 
 
 def is_healthcheck(obj):
-    """Return ``True`` if ``obj`` is an healthcheck."""
+    """Return ``True`` if ``obj`` is an healthcheck.
+
+    >>> from hospital import healthcheck, is_healthcheck
+    >>> @healthcheck
+    ... def test_dummy():
+    ...     pass
+    >>> is_healthcheck(test_dummy)
+    True
+
+    """
     try:
         return obj.is_healthcheck is True
     except AttributeError:
@@ -23,6 +32,7 @@ def healthcheck(test):
 
     Can be used as a function-decorator:
 
+    >>> from hospital import healthcheck, is_healthcheck
     >>> @healthcheck
     ... def test_dummy():
     ...     pass
@@ -55,4 +65,9 @@ def healthcheck(test):
 
 @healthcheck
 class HealthCheck(unittest.TestCase):
-    """Base class for health checks, extends unittest.TestCase."""
+    """Base class for health checks, extends unittest.TestCase.
+
+    This class exists for backward compatibility purpose and may be deprecated
+    or removed in future releases.
+
+    """

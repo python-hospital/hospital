@@ -1,18 +1,24 @@
-#################
-Run health checks
-#################
+#############################
+Collect and run health checks
+#############################
 
 Run health checks to make sure everything is ok. As an example, run health
 checks after a deployment to verify configuration, services...
 
-Health checks are tests having a ``is_healthcheck`` attribute which is
-``True``. Let's use this feature to capture and run the tests.
+The :func:`~hospital.core.healthcheck` decorator sets ``is_healthcheck``
+attribute to ``True`` to decorated objects. Let's use this feature to capture
+and run healthchecks.
+
+
+****
+Nose
+****
 
 With `nose` (here we run health checks of `hospital` project):
 
 .. code:: sh
 
-   nosetests --no-path-adjustment --all-modules --attr="is_healthcheck" hospital
+   nosetests --all-modules --attr="is_healthcheck" hospital
 
 .. tip::
 
@@ -21,5 +27,28 @@ With `nose` (here we run health checks of `hospital` project):
 
    .. code:: sh
 
-      nosetests --no-path-adjustment --all-modules --attr="!is_healthcheck" hospital
+      nosetests --all-modules --attr="!is_healthcheck" hospital
 
+.. tip::
+
+   `--all-modules option`_ makes Nose collect tests in all modules. Without the
+   option, it would have collected modules or packages named "tests", and not
+   "healthchecks".
+
+
+*****
+Other
+*****
+
+You can use the :func:`~hospital.core.is_healthcheck` function to verify
+whether an object is an healthcheck or not.
+
+.. autofunction:: hospital.core.is_healthcheck
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`--all-modules option`:
+   http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules

@@ -1,0 +1,7 @@
+#####################
+@hospital.healthcheck
+#####################
+
+.. py:module:: hospital.core
+
+.. autofunction:: healthcheck

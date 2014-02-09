@@ -41,3 +41,16 @@ You can reuse test libraries, like :mod:`unittest`:
 	   hospital.assert_http_response(url, status_code=200)
 
 `Hospital` provides a set of useful assertions and health check suites.
+
+***********************************
+Recommended namespace: healthchecks
+***********************************
+
+As a convention, put healthchecks in "healthchecks" namespace (i.e. module or
+package) inside your projects.
+
+Just as "tests" namespace is used by convention for tests.
+
+As an example, if your project distributes an "unbreakable" root package, then
+you should put healthchecks in either :file:`unbreakable/healthchecks.py`
+module or :file:`unbreakable/healthchecks/__init__.py` package.

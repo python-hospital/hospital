@@ -12,8 +12,10 @@ Contents
    faq
    install
    write
+   healthcheck-decorator
+   assertions
+   builtin-healthchecks
    run
-   api/index
    about/index
    contributing
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Declaration of API shortcuts."""
-from hospital.core import (HealthCheck,  # NoQA
-                           healthcheck,
-                           is_healthcheck)
+from hospital.core import HealthCheck  # NoQA
+from hospital.core import healthcheck  # NoQA
+from hospital.core import is_healthcheck  # NoQA
 # Assertions.
 from hospital.assertions.http import assert_http_response  # NoQA
 from hospital.assertions.networking import assert_ping  # NoQA

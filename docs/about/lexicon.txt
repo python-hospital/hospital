@@ -1,8 +1,8 @@
-###
-FAQ
-###
+#######
+Lexicon
+#######
 
-Here are frequently asked questions.
+Here are notes about vocabulary.
 
 .. contents::
 

@@ -2,7 +2,7 @@
 Assertions
 ##########
 
-`hospital` provides a set of assertions for use in health checks.
+`hospital` provides a set of assertions to write healthchecks.
 
 
 ****

@@ -40,7 +40,8 @@ healthcheck:
 
 
 test-documentation:
-	tox -e sphinx
+	mkdir -p var/docs
+	make --directory=docs clean html doctest
 
 
 sphinx:

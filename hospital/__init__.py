@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Hospital is a framework to write health checks around running services."""
+"""Hospital is a framework to write health checks around running services.
+
+Health checks are meant to run on any live instance, such as a PROD
+environment. They are part of the monitoring/supervision toolkit.
+
+"""
 import pkg_resources
 
 

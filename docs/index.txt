@@ -8,11 +8,10 @@ Contents
 .. toctree::
    :maxdepth: 2
    :titlesonly:
+   :includehidden:
 
-   faq
+   overview
    install
-   write
-   run
    api/index
    about/index
    contributing

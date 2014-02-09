@@ -1,0 +1,110 @@
+########
+Overview
+########
+
+
+*******************
+Write health checks
+*******************
+
+Write health checks just like you would write tests. The main difference is
+their scope: they check "production" facts instead of mocks/fakes/dummies.
+
+Health checks are special kind of tests. Use :func:`~hospital.core.healthcheck`
+decorator to differenciate health checks from tests.
+
+Just like tests, health checks can be simple functions that perform assertions:
+
+.. code:: python
+
+   import sys
+   import hospital
+
+   @hospital.healthcheck
+   def test_python_version():
+       """Python version >= 2."""
+       assert sys.version_info[0] >= 2
+
+You can reuse test libraries, like :mod:`unittest`:
+
+.. code:: python
+
+   import unittest
+   import hospital
+
+   @hospital.healthcheck
+   class DocumentationHealthCheck(unittest.TestCase):
+       """Check `hospital` online documentation."""
+       def test_ping(self):
+           """`hospital` documentation server responds to ping."""
+           hostname = 'hospital.readthedocs.org'
+           hospital.assert_ping(hostname)
+
+       def test_http_200(self):
+           """`hospital` online documentation returns HTTP 200."""
+           url = 'http://hospital.readthedocs.org/en/0.1/'
+	   hospital.assert_http_response(url, status_code=200)
+
+`Hospital` provides a set of useful assertions and health check suites.
+
+Recommended namespace: healthchecks
+===================================
+
+As a convention, put healthchecks in "healthchecks" namespace (i.e. module or
+package) inside your projects.
+
+Just as "tests" namespace is used by convention for tests.
+
+As an example, if your project distributes an "unbreakable" root package, then
+you should put healthchecks in either :file:`unbreakable/healthchecks.py`
+module or :file:`unbreakable/healthchecks/__init__.py` package.
+
+
+*****************************
+Collect and run health checks
+*****************************
+
+Run health checks to make sure everything is ok. As an example, run health
+checks after a deployment to verify configuration, services...
+
+The :func:`~hospital.core.healthcheck` decorator sets ``is_healthcheck``
+attribute to ``True`` to decorated objects. Let's use this feature to capture
+and run healthchecks.
+
+Nose
+====
+
+With `nose` (here we run health checks of `hospital` project):
+
+.. code:: sh
+
+   nosetests --all-modules --attr="is_healthcheck" hospital
+
+.. tip::
+
+   You may want to skip health checks when you run unit/functional/integration
+   tests. With `nose`, it could be:
+
+   .. code:: sh
+
+      nosetests --all-modules --attr="!is_healthcheck" hospital
+
+.. tip::
+
+   `--all-modules option`_ makes Nose collect tests in all modules. Without the
+   option, it would have collected modules or packages named "tests", and not
+   "healthchecks".
+
+Other
+=====
+
+You can use the :func:`~hospital.is_healthcheck` function to verify whether an
+object is an healthcheck or not.
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`--all-modules option`:
+   http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules

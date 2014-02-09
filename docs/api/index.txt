@@ -2,12 +2,52 @@
 API
 ###
 
-This section focuses on `hospital`'s Python API.
+This section deals with `hospital`'s API:
 
 .. toctree::
-   :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    core
    assertions
    healthchecks
+
+* :func:`~hospital.core.healthcheck` allows you to mark objects (typically
+  tests) as healthchecks.
+
+* `hospital` provides a set of assertions that cover very common use cases:
+
+  * :func:`~hospital.assertions.http.assert_http_response`
+
+  * :func:`~hospital.assertions.networking.assert_ping`
+
+  * :func:`~hospital.assertions.packaging.assert_supported_python_version`
+
+* `hospital` provides a set of health check suites you can customize:
+
+  * :class:`~hospital.healthchecks.predictable.ForeverPassingHealthCheck`
+
+  * :class:`~hospital.healthchecks.packaging.DistributionHealthCheck`
+
+* :func:`~hospital.core.is_healthcheck` returns ``True`` if argument is an
+  healthcheck.
+
+
+**********************************
+Public API exposed in root package
+**********************************
+
+Main API is fully exposed within `hospital`'s root package. Most of the time,
+implementation lives in a module or package deeper inside `hospital` package,
+and there is a shortcut declared in root package.
+
+As an example, :func:`~hospital.assertions.http.assert_http_response` lives in
+``hospital.assertions.http`` module, but you can use the
+``hospital.assert_http_response`` shorcut.
+
+This design has been chosen for two main reasons:
+
+* ease of use. With a simple ``import hospital``, you get everything you need.
+  No need to learn `hospital`'s internals.
+
+* deprecation policy. `hospital` authors take care of the API that is exposed
+  in root package. They care less about moving or removing internals.

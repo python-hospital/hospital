@@ -3,10 +3,10 @@
 import requests
 
 
-def assert_http_response(url, status_code=200, timeout=1):
+def assert_http_response(url, status_code=200, timeout=1, msg=None):
     """Assert that GET ``url`` returns ``status_code`` within ``timeout``.
 
-    >>> from hospital.assertions.http import assert_http_response
+    >>> from hospital import assert_http_response
     >>> assert_http_response('http://hospital.readthedocs.org', 200)
 
     Raises :class:`AssertionError` in case of failure.
@@ -29,11 +29,13 @@ def assert_http_response(url, status_code=200, timeout=1):
     try:
         response = requests.get(url, timeout=timeout, stream=True)
     except requests.exceptions.RequestException as e:
-        error_msg = "Failed to fetch URL {url}.\nException was: {exception}" \
-                    .format(url=url, exception=e)
-        raise AssertionError(error_msg)
-    error_msg = 'GET "{url}" returned {real} status code. ' \
-                'Expected {expected}.'.format(url=url,
-                                              real=response.status_code,
-                                              expected=status_code)
-    assert response.status_code is status_code, error_msg
+        if msg is None:
+            msg = "Failed to fetch URL {url}.\nException was: {exception}" \
+                  .format(url=url, exception=e)
+        raise AssertionError(msg)
+    if msg is None:
+        msg = 'GET "{url}" returned {real} status code. ' \
+              'Expected {expected}.'.format(url=url,
+                                            real=response.status_code,
+                                            expected=status_code)
+    assert response.status_code is status_code, msg

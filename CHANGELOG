@@ -8,6 +8,8 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.4 (unreleased)
 ----------------
 
+- Feature #33: builtin assertions functions accept optional ``msg`` argument.
+
 - Bugfix #31: when ``assert_http_response()`` fails, it provides comprehensive
   message (was "AssertionError" without details about URL and reason).
 

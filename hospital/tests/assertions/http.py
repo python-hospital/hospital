@@ -20,3 +20,14 @@ class AssertHttpResponseTestCase(unittest.TestCase):
         self.assertIn('timed out', message)
         self.assertIn('timeout', message)
         self.assertIn(str(timeout), message)
+
+    def test_custom_msg(self):
+        """assert_http_response() accepts optional ``msg`` argument."""
+        url = 'http://hospital.readthedocs.org'
+        timeout = 0.0001
+        msg = "Custom message."
+        # Make sure AssertionError is raised.
+        with self.assertRaises(AssertionError) as context:
+            http.assert_http_response(url, timeout=timeout, msg=msg)
+        # Let's check exception's message.
+        self.assertEqual(context.exception.args[0], msg)

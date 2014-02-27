@@ -16,14 +16,14 @@ class HealthCheckLoaderTestCase(unittest.TestCase):
         """HealthCheckLoader.is_health_check checks ``is_healthcheck`` attr."""
         loader = HealthCheckLoader()
 
-        self.assertTrue(loader.is_health_check(mock.Mock(is_healthcheck=True)))
+        self.assertTrue(loader.is_healthcheck(mock.Mock(is_healthcheck=True)))
 
         class FakeHealthCheck(HealthCheck):
             def test_fake(self):
                 pass
-        self.assertTrue(loader.is_health_check(FakeHealthCheck('test_fake')))
+        self.assertTrue(loader.is_healthcheck(FakeHealthCheck('test_fake')))
 
         class FakeTestCase(unittest.TestCase):
             def test_fake(self):
                 pass
-        self.assertFalse(loader.is_health_check(FakeTestCase('test_fake')))
+        self.assertFalse(loader.is_healthcheck(FakeTestCase('test_fake')))

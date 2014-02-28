@@ -1,0 +1,97 @@
+##################
+Write healthchecks
+##################
+
+Health checks are special kind of tests. So you can write health checks just
+like you would write tests, except you use :func:`~hospital.core.healthcheck`
+decorator to differenciate health checks from tests.
+
+Of course, you will not check the same things in tests and in healthchecks.
+The main difference is the scope: healthchecks validate "production" stuff
+whereas tests use mocks/fakes/dummies. See also :doc:`/about/lexicon`.
+ 
+
+*******************
+Assert expectations
+*******************
+
+Just like tests, health checks can be simple functions that perform assertions:
+
+.. code:: python
+
+   import sys
+   import hospital
+
+   @hospital.healthcheck
+   def test_python_version():
+       """Python version >= 2."""
+       assert sys.version_info[0] >= 2
+
+You can reuse test libraries, like :mod:`unittest`:
+
+.. code:: python
+
+   import unittest
+   import hospital
+
+   @hospital.healthcheck
+   class DocumentationHealthCheck(unittest.TestCase):
+       """Check `hospital` online documentation."""
+       def test_ping(self):
+           """`hospital` documentation server responds to ping."""
+           hostname = 'hospital.readthedocs.org'
+           hospital.assert_ping(hostname)
+
+       def test_http_200(self):
+           """`hospital` online documentation returns HTTP 200."""
+           url = 'http://hospital.readthedocs.org/en/0.1/'
+	   hospital.assert_http_response(url, status_code=200)
+
+`Hospital` provides a set of useful :doc:`/api/assertions` and :doc:`health
+check suites </api/healthchecks>`.
+
+
+***********************************
+Recommended namespace: healthchecks
+***********************************
+
+As a convention, put healthchecks in "healthchecks" namespace (i.e. module or
+package) inside your projects.
+
+Just as "tests" namespace is used by convention for tests.
+
+As an example, if your project distributes an "unbreakable" root package, then
+you should put healthchecks in either :file:`unbreakable/healthchecks.py`
+module or :file:`unbreakable/healthchecks/` package.
+
+
+********************
+What should I check?
+********************
+
+Just like tests, one big question is: what should I check? Here are some tips:
+
+Check external resources and services
+=====================================
+
+Does your application depends on third-party services? You should check their
+availability, and when possible their version.
+
+Check configuration
+===================
+
+Often, you can guess the things to check by looking at your configuration. As
+an example, URL of external services are usually mentioned in configuration.
+In configuration, you may find more items to check, including internal
+resources.
+
+Check environment
+=================
+
+With tests (unit, functional, integration...), you make sure your application
+has the desired behaviour in known situations. With healthchecks, you can
+assert the runtime environment (production) matches these known situations.
+
+As an example, you may want to assert your application uses known good versions
+of Python and dependencies. Or you may want to assert the user running your
+application can read (or write) some filesystem locations...

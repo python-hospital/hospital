@@ -1,0 +1,130 @@
+############################
+Collect and run healthchecks
+############################
+
+Given :doc:`you have healthchecks </write>`, there are two main ways to
+collect and run healthchecks:
+
+1. run a shell command:
+
+   * using `hospital.cli`_
+   * using `nose`_
+
+2. perform GET requests to a web service: using `hospital.wsgi`_.
+
+If you want to setup another runner, notice that you can use the
+:func:`~hospital.core.is_healthcheck` function to verify whether an object is
+a healthcheck or not.
+
+
+************
+hospital.cli
+************
+
+You can use :mod:`hospital.cli` to collect and run healthchecks:
+
+.. code:: console
+
+   $ python -m hospital.cli hospital.healthchecks.predictable
+   .
+   ----------------------------------------------------------------------
+   Ran 1 test in 0.001s
+
+   OK
+
+See ``python -m hospital.cli --help`` for detailed usage and options.
+
+
+****
+Nose
+****
+
+Here are guidelines to collect and run healthchecks with `nose`_.
+In the examples below, we run health checks of `hospital` project.
+
+.. code:: console
+
+   $ nosetests --all-modules --attr='is_healthcheck' hospital.healthchecks.predictable
+   .
+   ----------------------------------------------------------------------
+   Ran 1 test in 0.001s
+   
+   OK
+
+Reciprocally, you may want to skip healthchecks when you run tests.
+With `nose`, it could be:
+
+.. code:: console
+
+   $ nosetests --all-modules --attr='!is_healthcheck' hospital.healthchecks
+   
+   ----------------------------------------------------------------------
+   Ran 0 tests in 0.000s
+
+   OK
+
+.. tip::
+
+   `--all-modules option`_ makes Nose collect tests in all modules. Without the
+   option, it would have collected modules or packages named "tests", and not
+   "healthchecks".
+
+
+*************
+hospital.wsgi
+*************
+
+You can use :mod:`hospital.wsgi` to expose healthchecks over HTTP:
+
+.. code:: console
+
+   $ python -m hospital.wsgi hospital.healthchecks.predictable
+   Serving on 0.0.0.0 port 1515...
+
+See ``python -m hospital.wsgi --help`` for detailed usage and options.
+
+Then each time you perform a GET on the server's root, healthchecks are
+collected and run.
+
+The status code of the response is 200 in case all healthchecks passed, else it
+is 500.
+
+.. code:: console
+
+   $ curl -X GET -I http://localhost:112112/
+   HTTP/1.0 200 OK
+   Date: Fri, 28 Feb 2014 13:19:08 GMT
+   Server: WSGIServer/0.1 Python/2.7.5+
+   Content-Type: application/json; charset=utf-8
+   Content-Length: 520
+
+The output is JSON:
+
+.. code:: json
+
+   {
+       "status": "pass",
+       "details": [
+           {
+               "test": "Health checks are collected.",
+               "status": "pass"
+           }
+       ],
+       "summary": {
+           "skip": 0,
+           "pass": 1,
+           "expected_failure": 0,
+           "error": 0,
+           "fail": 0,
+           "total": 1,
+           "unexpected_success": 0
+       }
+   }
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`nose`: https://nose.readthedocs.org/
+.. _`--all-modules option`:
+   http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules

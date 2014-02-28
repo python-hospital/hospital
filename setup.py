@@ -20,19 +20,27 @@ VERSION = open(os.path.join(here, 'VERSION')).read().strip()
 AUTHOR = u'Benoît Bryon'
 EMAIL = u'benoit@marmelune.net'
 URL = 'https://{name}.readthedocs.org/'.format(name=NAME)
-CLASSIFIERS = ['Development Status :: 3 - Alpha',
-               'License :: OSI Approved :: BSD License',
-               'Programming Language :: Python :: 2.7',
-               'Programming Language :: Python :: 3.3']
-KEYWORDS = ['diagnosis',
-            'healthcheck',
-            'monitoring',
-            'probe',
-            'smoketest',
-            'supervision',
-            'testing']
+CLASSIFIERS = [
+    'Development Status :: 3 - Alpha',
+    'License :: OSI Approved :: BSD License',
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3.3',
+]
+KEYWORDS = [
+    'diagnosis',
+    'healthcheck',
+    'monitoring',
+    'probe',
+    'smoketest',
+    'supervision',
+    'testing',
+]
 PACKAGES = [NAME.replace('-', '_')]
-REQUIREMENTS = ['setuptools', 'requests']
+REQUIREMENTS = [
+    'setuptools',
+    'requests',
+    'six',
+]
 if IS_PYTHON2:
     REQUIREMENTS.extend(['mock'])
 ENTRY_POINTS = {}

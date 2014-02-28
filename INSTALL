@@ -14,3 +14,10 @@ pip:
 .. code:: sh
 
    pip install hospital
+
+
+.. rubric:: Notes & references
+
+.. seealso::
+
+   :doc:`/about/changelog`

@@ -10,8 +10,9 @@ Contents
    :titlesonly:
    :includehidden:
 
-   overview
    install
+   write
+   run
    api/index
    about/index
    contributing

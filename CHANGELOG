@@ -8,7 +8,13 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+Introduced CLI and WSGI. They offer basic features (with experimental
+implementation), but they should be enough as proof of concepts.
+
+- Feature #39: ``python -m hospital.cli`` collects and runs healthchecks.
+
+- Feature #20: ``python -m hospital.wsgi`` runs a web server that collects
+  and runs healthchecks on demand.
 
 
 0.4 (2014-02-25)

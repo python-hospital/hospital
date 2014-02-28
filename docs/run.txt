@@ -1,0 +1,77 @@
+############################
+Collect and run healthchecks
+############################
+
+Given :doc:`you have healthchecks </write>`, there are two main ways to
+collect and run healthchecks:
+
+1. run a shell command:
+
+   * using `hospital.cli`_
+   * using `nose`_
+
+2. perform GET requests to a web service: using `hospital.wsgi`_.
+
+If you want to setup another runner, notice that you can use the
+:func:`~hospital.core.is_healthcheck` function to verify whether an object is
+a healthcheck or not.
+
+
+************
+hospital.cli
+************
+
+You can use :mod:`hospital.cli` to collect and run healthchecks:
+
+.. code:: sh
+
+   python -m hospital.cli --discover hospital.healthchecks
+
+See ``python -m hospital.cli --help`` for detailed usage and options.
+
+
+****
+Nose
+****
+
+Here are guidelines to collect and run healthchecks with `nose`_.
+In the examples below, we run health checks of `hospital` project.
+
+.. code:: sh
+
+   nosetests --all-modules --attr="is_healthcheck" hospital
+
+Reciprocally, you may want to skip healthchecks when you run tests.
+With `nose`, it could be:
+
+.. code:: sh
+
+   nosetests --all-modules --attr="!is_healthcheck" hospital
+
+.. tip::
+
+   `--all-modules option`_ makes Nose collect tests in all modules. Without the
+   option, it would have collected modules or packages named "tests", and not
+   "healthchecks".
+
+
+*************
+hospital.wsgi
+*************
+
+You can use :mod:`hospital.wsgi` to expose healthchecks over HTTP:
+
+.. code:: sh
+
+   python -m hospital.wsgi --discover hospital.healthchecks
+
+See ``python -m hospital.wsgi --help`` for detailed usage and options.
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`nose`: https://nose.readthedocs.org/
+.. _`--all-modules option`:
+   http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules

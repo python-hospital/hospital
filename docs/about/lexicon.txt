@@ -4,6 +4,12 @@ Lexicon
 
 Here are notes about vocabulary.
 
+.. note::
+
+   The definitions below reflect usage in `hospital` project. If you think
+   something is wrong, let's `report it as a bug`_, because vocabulary matters
+   ;)
+
 .. contents::
 
 
@@ -88,3 +94,10 @@ When smoke tests return positive feedback (i.e. everything seems alright), it
 may be useless to run deeper tests. Else, if some smoke test returns negative
 feedback (there is something wrong), then additional health checks may provide
 more details. This is what `hospital` calls a diagnosis scenario.
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`report it as a bug`: https://github.com/python-hospital/hospital/issues

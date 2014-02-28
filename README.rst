@@ -28,7 +28,7 @@ Project status
 See also `vision
 <http://hospital.readthedocs.org/en/latest/about/vision.html>`_.
 
-Of course, any ideas, feedback and help are welcome :)
+Of course, any ideas, feedback or help are welcome :)
 
 
 *********
@@ -43,4 +43,5 @@ Resources
 * Code repository: https://github.com/python-hospital/hospital
 * Continuous integration: https://travis-ci.org/python-hospital/hospital
 * Bugs & feature requests: https://github.com/python-hospital/hospital/issues
+* Changelog: https://hospital.readthedocs.org/en/latest/about/changelog.html
 * Roadmap: https://github.com/python-hospital/hospital/issues/milestones

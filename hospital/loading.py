@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Utilities to discover and load health checks."""
+import os
 import unittest
+import sys
 
 from hospital.core import is_healthcheck
 
@@ -76,3 +78,22 @@ class HealthCheckLoader(unittest.TestLoader):
         suite = super(HealthCheckLoader, self).loadTestsFromNames(names,
                                                                   module)
         return self.filter_suite(suite)
+
+    def discover(self, start_dir, pattern='*', top_level_dir=None):
+        try:
+            __import__(start_dir)
+        except ImportError:
+            # Maybe a filename.
+            return super(HealthCheckLoader, self).discover(
+                start_dir=start_dir,
+                pattern=pattern,
+                top_level_dir=top_level_dir)
+        else:
+            start_module = sys.modules[start_dir]
+            if os.path.basename(start_module.__file__).startswith('__init__.'):
+                return super(HealthCheckLoader, self).discover(
+                    start_dir=os.path.dirname(start_module.__file__),
+                    pattern=pattern,
+                    top_level_dir=None)
+            else:  # It is a single module.
+                return self.loadTestsFromModule(start_module)

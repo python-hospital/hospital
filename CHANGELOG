@@ -14,7 +14,7 @@ implementation), but they should be enough as proof of concepts.
 - Feature #39: ``python -m hospital.cli`` collects and runs healthchecks.
 
 - Feature #20: ``python -m hospital.wsgi`` runs a web server that collects
-  and runs healthchecks on demand.
+  and runs healthchecks on HTTP GET.
 
 
 0.4 (2014-02-25)

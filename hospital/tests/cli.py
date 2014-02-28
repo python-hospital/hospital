@@ -35,7 +35,7 @@ class HealthCheckProgramTestCase(unittest.TestCase):
         """HealthCheckProgram runs healthchecks."""
         stream = StringIO()
         cli.main(
-            args=['--names', 'hospital.healthchecks.predictable'],
+            args=['hospital.healthchecks.predictable'],
             stream=stream)
         output = stream.getvalue()
         self.assertTrue(output.startswith(
@@ -43,4 +43,18 @@ class HealthCheckProgramTestCase(unittest.TestCase):
             '-------------------------------------'
             '---------------------------------\n'
             'Ran 1 test in '))
+        self.assertTrue(output.endswith('s\n\nOK\n'))
+
+    def test_discovery_module(self):
+        """HealthCheckProgram discovers tests in package."""
+        stream = StringIO()
+        cli.main(
+            args=['hospital.healthchecks'],
+            stream=stream)
+        output = stream.getvalue()
+        self.assertTrue(output.startswith(
+            '..\n'
+            '-------------------------------------'
+            '---------------------------------\n'
+            'Ran 2 tests in '))
         self.assertTrue(output.endswith('s\n\nOK\n'))

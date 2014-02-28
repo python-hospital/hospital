@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
-"""WSGI utilities to collect and run healthchecks as web service."""
-import itertools
+"""WSGI utilities to collect and run healthchecks as web service.
+
+.. warning::
+
+   Implementation is not mature, i.e. this part of hospital API may change
+   in future releases. That said, it does the job ;)
+
+"""
 import json
+import os
 import unittest
 from wsgiref.simple_server import make_server
 
-from hospital.cli import cli_parser, HealthCheckProgram
+from hospital.cli import base_parser, HealthCheckProgram
 
 
 class STATUS(object):
@@ -104,11 +111,13 @@ class HealthCheckApp(HealthCheckProgram):
     def details(self, result):
         """Generate report details dict."""
         for status, test, context in result.results:
-            yield {
+            report = {
                 'test': self.get_test_title(test),
                 'status': status,
-                'context': u'{context}'.format(context=context),
             }
+            if context is not None:
+                report['context'] = u'{context}'.format(context=context)
+            yield report
 
     def __call__(self, environ, start_response):
         suite = self.load_tests()
@@ -131,22 +140,25 @@ class HealthCheckApp(HealthCheckProgram):
 
 
 def wsgi_parser(program=None):
-    parser = cli_parser(program)
+    parser = base_parser(program)
     parser.add_argument(
         '--port',
         action='store',
         nargs='?',
         type=int,
-        default='8112')
+        default='1515',
+        help="Port for webserver.",
+    )
     return parser
 
 
 def main(program=None, args=None):
     parser = wsgi_parser(program)
     arguments = parser.parse_args(args)
-    app = HealthCheckApp(
-        discover=itertools.chain(*arguments.discover),
-        names=itertools.chain(*arguments.names))
+    healthchecks = arguments.healthchecks
+    if not healthchecks:
+        healthchecks = [os.path.abspath(os.getcwd())]
+    app = HealthCheckApp(discover=healthchecks)
     httpd = make_server('', arguments.port, app)
     server_address = httpd.socket.getsockname()
     print("Serving on {ip} port {port}...".format(

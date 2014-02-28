@@ -1,28 +1,50 @@
 # -*- coding: utf-8 -*-
-"""Command-line interface utilities to collect and run healthchecks."""
+"""Command-line interface utilities to collect and run healthchecks.
+
+.. warning::
+
+   Implementation is not mature, i.e. this part of hospital API may change
+   in future releases. That said, it does the job ;)
+
+"""
 import argparse
-import itertools
+import os
 import sys
 import unittest
 
 from hospital.loading import HealthCheckLoader
 
 
+def base_parser(program):
+    """Return base argument parser."""
+    parser = argparse.ArgumentParser(
+        prog=program,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        'healthchecks',
+        action='store',
+        nargs='*',
+        help="Space separated list of healthchecks to collect. "
+             "Each item in the list can be (in order of priority): a "
+             "dotted-path to importable module or package, or a path to a "
+             "folder.")
+    return parser
+
+
 def cli_parser(program):
-    """Argument parser factory."""
-    parser = argparse.ArgumentParser(prog=program)
+    """Argument parser factory for hospital.cli."""
+    parser = base_parser(program)
     parser.add_argument(
-        '--discover',
-        action='append',
-        nargs='*')
-    parser.add_argument(
-        '--names',
-        action='append',
-        nargs='*')
+        '-v', '--verbose',
+        action='store_true',
+        default=False,
+        help="Verbose output.")
     return parser
 
 
 class HealthCheckProgram(object):
+    """Utility to collect and run healthchecks in a shell."""
     def __init__(self, discover=[], names=[], modules=[], test_cases=[],
                  runner=None, loader=None, result_class=None, verbosity=1,
                  failfast=False, stream=sys.stderr):
@@ -88,12 +110,14 @@ def main(program=None, args=None, stream=sys.stderr):
     """Collect and run healthchecks, output to stdout and stderr."""
     parser = cli_parser(program)
     arguments = parser.parse_args(args)
-    if arguments.discover:
-        discover = itertools.chain(arguments.discover)
-    else:
-        discover = []
-    names = itertools.chain(*arguments.names) if arguments.names else []
-    app = HealthCheckProgram(discover=discover, names=names, stream=stream)
+    healthchecks = arguments.healthchecks
+    verbosity = 2 if arguments.verbose else 1
+    if not healthchecks:
+        healthchecks = [os.path.abspath(os.getcwd())]
+    app = HealthCheckProgram(
+        discover=healthchecks,
+        stream=stream,
+        verbosity=verbosity)
     app()
 
 

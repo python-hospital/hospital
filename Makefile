@@ -2,23 +2,48 @@
 #
 # For standard installation of hospital as a library, see INSTALL.
 # For details about hospital's development environment, see CONTRIBUTING.rst.
+#
+PIP = pip
+TOX = tox
 
 
+.PHONY: all help develop clean distclean maintainer-clean test test-app healthcheck sphinx readme documentation release
+
+
+# Default target. Does nothing.
+all:
+	@echo "Reference card for usual actions in development environment."
+	@echo "Nothing to do by default."
+	@echo "Try 'make help'."
+
+
+#: help - Display callable targets.
+help:
+	@echo "Reference card for usual actions in development environment."
+	@echo "Here are available targets:"
+	@egrep -o "^#: (.+)" [Mm]akefile  | sed 's/#: /* /'
+
+
+#: develop - Install minimal development utilities such as tox.
 develop:
-	pip install tox Sphinx docutils zest.releaser
-	pip install -e ./
+	$(PIP) install tox
+	$(PIP) install -e ./
 
 
+#: clean - Basic cleanup, mostly temporary files.
 clean:
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" -delete
 	find . -name ".noseids" -delete
 
 
+#: distclean - Remove local builds, such as *.egg-info.
 distclean: clean
+	rm -rf *.egg
 	rm -rf *.egg-info
 
 
+#: maintainer-clean - Remove almost everything that can be re-generated.
 maintainer-clean: distclean
 	rm -rf bin/
 	rm -rf lib/
@@ -27,35 +52,35 @@ maintainer-clean: distclean
 	rm -rf .tox/
 
 
+#: test - Run all test suite.
 test:
-	tox
+	$(TOX)
 
 
+#: test-app - Run unit tests.
 test-app:
-	tox -e py27,py33
+	$(TOX) -e py27,py33
 
 
+#: healthcheck - Run hospital's own healthchecks.
 healthcheck:
-	tox -e healthcheck
+	$(TOX) -e healthcheck
 
 
-test-documentation:
-	mkdir -p var/docs
-	make --directory=docs clean html doctest
-
-
+#: sphinx - Build Sphinx documentation in var/docs/html
 sphinx:
-	mkdir -p var/docs
-	make --directory=docs clean html
+	$(TOX) -e sphinx
 
 
+#: readme - Build standalone documentation files (README, CONTRIBUTING...).
 readme:
-	mkdir -p var/docs
-	rst2html.py --exit-status=2 README.rst var/docs/README.html
+	$(TOX) -e readme
 
 
+#: documentation - Build standalone documentation files and Sphinx docs.
 documentation: sphinx readme
 
 
+#: release - Tag and push to PyPI.
 release:
-	fullrelease
+	$(TOX) -e release

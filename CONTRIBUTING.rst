@@ -54,7 +54,7 @@ Clone `hospital` repository (adapt to use your own fork):
 Usual actions
 *************
 
-The :file:`Makefile` is the reference card for usual actions in development
+The `Makefile` is the reference card for usual actions in development
 environment:
 
 * Install development toolkit with `pip`_: ``make develop``.
@@ -62,7 +62,7 @@ environment:
 * Run tests with `tox`_: ``make test``.
 
 * Build documentation: ``make documentation``. It builds `Sphinx`_
-  documentation in :file:`var/docs/html/index.html`.
+  documentation in `var/docs/html/index.html`.
 
 * Run `hospital`'s own healthchecks: ``make healthcheck``.
 
@@ -70,6 +70,8 @@ environment:
 
 * Cleanup local repository: ``make clean``, ``make distclean`` and
   ``make maintainer-clean``.
+
+See also ``make help``.
 
 
 .. rubric:: Notes & references

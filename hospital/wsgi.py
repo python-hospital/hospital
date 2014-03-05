@@ -12,12 +12,7 @@ import os
 import unittest
 from wsgiref.simple_server import make_server
 
-from hospital.cli import base_parser, HealthCheckProgram
-
-# Environment configuration
-HEALTHCHECKS = os.environ.get('HEALTHCHECKS')
-if HEALTHCHECKS:
-    HEALTHCHECKS = HEALTHCHECKS.split()
+from hospital.cli import base_parser, HealthCheckProgram, HEALTHCHECKS
 
 
 class STATUS(object):

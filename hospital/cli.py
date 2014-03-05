@@ -18,6 +18,8 @@ from hospital.loading import HealthCheckLoader
 HEALTHCHECKS = os.environ.get('HEALTHCHECKS')
 if HEALTHCHECKS:
     HEALTHCHECKS = HEALTHCHECKS.split()
+else:
+    HEALTHCHECKS = [os.path.abspath(os.getcwd())]
 
 
 def base_parser(program):
@@ -120,8 +122,6 @@ def main(program=None, args=None, stream=sys.stderr):
     else:
         healthchecks = HEALTHCHECKS
     verbosity = 2 if arguments.verbose else 1
-    if not healthchecks:
-        healthchecks = [os.path.abspath(os.getcwd())]
     app = HealthCheckProgram(
         discover=healthchecks,
         stream=stream,

@@ -78,10 +78,10 @@ You can use :mod:`hospital.wsgi` to expose healthchecks over HTTP:
 
 .. code:: console
 
-   $ python -m hospital.wsgi hospital.healthchecks.predictable
+   $ hospital_serve hospital.healthchecks.predictable
    Serving on 0.0.0.0 port 1515...
 
-See ``python -m hospital.wsgi --help`` for detailed usage and options.
+See ``hospital_serve --help`` for detailed usage and options.
 
 Then each time you perform a GET on the server's root, healthchecks are
 collected and run.

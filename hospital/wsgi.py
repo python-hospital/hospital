@@ -159,7 +159,10 @@ application = HealthCheckApp(discover=HEALTHCHECKS)
 def main(program=None, args=None):
     parser = wsgi_parser(program)
     arguments = parser.parse_args(args)
-    healthchecks = arguments.healthchecks or HEALTHCHECKS
+    if arguments.healthchecks:
+        healthchecks = arguments.healthchecks
+    else:
+        healthchecks = HEALTHCHECKS
     app = HealthCheckApp(discover=healthchecks)
     httpd = make_server('', arguments.port, app)
     server_address = httpd.socket.getsockname()

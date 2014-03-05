@@ -151,13 +151,18 @@ def wsgi_parser(program=None):
     )
     return parser
 
+# WSGI APP endpoint
+HEALTHCHECKS = os.environ.get('HEALTHCHECKS', [os.path.abspath(os.getcwd())])
+application = HealthCheckApp(discover=HEALTHCHECKS)
+
 
 def main(program=None, args=None):
     parser = wsgi_parser(program)
     arguments = parser.parse_args(args)
-    healthchecks = arguments.healthchecks
-    if not healthchecks:
-        healthchecks = [os.path.abspath(os.getcwd())]
+    if arguments.healthchecks:
+        healthchecks = arguments.healthchecks
+    else:
+        healthchecks = HEALTHCHECKS
     app = HealthCheckApp(discover=healthchecks)
     httpd = make_server('', arguments.port, app)
     server_address = httpd.socket.getsockname()

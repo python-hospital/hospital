@@ -7,10 +7,14 @@ collect and run healthchecks:
 
 1. run a shell command:
 
-   * using `hospital.cli`_
-   * using `nose`_
+   * using `hospital.cli`_;
+   * using `nose`_.
 
-2. perform GET requests to a web service: using `hospital.wsgi`_.
+2. perform GET requests to a web service: using `hospital.wsgi`_...
+
+   * with `Chaussette`_, `Gunicorn`_ or `Circus`_;
+   * with `twod.wsgi and Django`_;
+   * as `a (basic) standalone server <hospital.wsgi>`_.
 
 If you want to setup another runner, notice that you can use the
 :func:`~hospital.core.is_healthcheck` function to verify whether an object is
@@ -39,7 +43,7 @@ See ``python -m hospital.cli --help`` for detailed usage and options.
 Nose
 ****
 
-Here are guidelines to collect and run healthchecks with `nose`_.
+Here are guidelines to collect and run healthchecks with `Nose test runner`_.
 In the examples below, we run health checks of `hospital` project.
 
 .. code:: console
@@ -74,19 +78,16 @@ With `nose`, it could be:
 hospital.wsgi
 *************
 
-You can use :mod:`hospital.wsgi` to expose healthchecks over HTTP:
-
-Using the standalone HTTPD server
-+++++++++++++++++++++++++++++++++
+:mod:`hospital.wsgi` embeds a basic HTTP server:
 
 .. code:: console
 
-   $ hospital_serve hospital.healthchecks.predictable
+   $ python -m hospital.wsgi hospital.healthchecks.predictable
    Serving on 0.0.0.0 port 1515...
 
-See ``hospital_serve --help`` for detailed usage and options.
+See ``python -m hospital.wsgi --help`` for detailed usage and options.
 
-Then each time you perform a GET on the server's root, healthchecks are
+Each time you perform a GET on the server's root, healthchecks are
 collected and run.
 
 The status code of the response is 200 in case all healthchecks passed, else it
@@ -94,7 +95,7 @@ is 500.
 
 .. code:: console
 
-   $ curl -X GET -I http://localhost:112112/
+   $ curl -X GET -I http://localhost:1515/
    HTTP/1.0 200 OK
    Date: Fri, 28 Feb 2014 13:19:08 GMT
    Server: WSGIServer/0.1 Python/2.7.5+
@@ -124,84 +125,118 @@ The output is JSON:
        }
    }
 
-Using the WSGI endpoint
-+++++++++++++++++++++++
 
-With Gunicorn
--------------
+*************************
+hospital.wsgi.application
+*************************
 
-.. code:: console
-
-    export HEALTHCHECKS='hospital.healthchecks.predictable'
-    gunicorn -w 4 hospital.wsgi:application
-
-http://gunicorn.org/
+:data:`hospital.wsgi.application` is a WSGI endpoint. It reads the list of
+healthchecks to run in ``HEALTHCHECKS`` environment variable (space separated).
 
 
-With Chaussette
----------------
+********
+Gunicorn
+********
 
 .. code:: console
 
-    export HEALTHCHECKS='hospital.healthchecks.predictable'
-    chaussette hospital.wsgi.application
+   export HEALTHCHECKS='hospital.healthchecks.predictable'
+   gunicorn -w 4 hospital.wsgi:application
 
-http://chaussette.readthedocs.org/en/1.0/
+Which can also be written in a single line:
 
-With circus
------------
+.. code:: console
+
+   HEALTHCHECKS='hospital.healthchecks.predictable' gunicorn -w 4 hospital.wsgi:application
+
+See `Gunicorn documentation`_ for details.
+
+
+**********
+Chaussette
+**********
+
+.. code:: console
+
+   export HEALTHCHECKS='hospital.healthchecks.predictable'
+   chaussette hospital.wsgi.application
+
+Which can also be written in a single line:
+
+.. code:: console
+
+   HEALTHCHECKS='hospital.healthchecks.predictable' chaussette hospital.wsgi.application
+
+See `Chaussette documentation` for details.
+
+
+******
+Circus
+******
+
+Here is a sample Circus configuration serving
+"hospital.healthchecks.predictable" healthchecks on port 2014, using
+Chaussette and a virtual environnement. Adapt it to your needs.
 
 .. code:: ini
 
-    [watcher:yourproject-healthchecks]
-    cmd = venv/bin/chaussette --fd $(circus.sockets.yourproject-healthchecks) hospital.wsgi.application
-    numprocesses = 1
-    use_sockets = True
-    copy_env = True
-    
-    working_dir = path/to/yourproject
-    
-    stdout_stream.class = FileStream
-    stdout_stream.filename = /var/log/chaussette/wsgi_healthchecks_out.log
-    stdout_stream.time_format = [%Y/%m/%d | %H:%M:%S]
-    
-    stderr_stream.class = FileStream
-    stderr_stream.filename = /var/log/chaussette/wsgi_healthchecks_err.log
-    stderr_stream.time_format = [%Y/%m/%d | %H:%M:%S]
+   [watcher:yourproject-healthchecks]
+   # Service command.
+   cmd = bin/chaussette --fd $(circus.sockets.yourproject-healthchecks) hospital.wsgi.application
+   numprocesses = 1
+   use_sockets = True
+   copy_env = True
+   working_dir = path/to/your-virtualenv
+   # Stdout logs.
+   stdout_stream.class = FileStream
+   stdout_stream.filename = /var/log/chaussette/wsgi_healthchecks_out.log
+   stdout_stream.time_format = [%Y/%m/%d | %H:%M:%S]
+   # Stderr logs.
+   stderr_stream.class = FileStream
+   stderr_stream.filename = /var/log/chaussette/wsgi_healthchecks_err.log
+   stderr_stream.time_format = [%Y/%m/%d | %H:%M:%S]
 
-    [socket:yourproject-healthchecks]
-    host = 127.0.0.1
-    port = 2014
+   [socket:yourproject-healthchecks]
+   host = 127.0.0.1
+   port = 2014
 
-    [env:yourproject-healthchecks]
-    HEALTHCHECKS = hospital.healthchecks.predictable
+   [env:yourproject-healthchecks]
+   HEALTHCHECKS = hospital.healthchecks.predictable
 
-http://circus.readthedocs.org/en/latest/
+See `Circus documentation`_ for details.
 
 
-With twod.wsgi as a Django URL
-------------------------------
+********************
+twod.wsgi and Django
+********************
+
+You can use `twod.wsgi` and :class:`hospital.wsgi.HealthCheckApp` to serve
+healthchecks with `Django`_. In your project's :file:`urls.py` module:
 
 .. code:: python
 
-    # urls.py
-    
-    from twod.wsgi import make_wsgi_view
-    from hospital.wsgi import HealthCheckApp
-    
-    urlpatterns = patterns('',
-      # ...
-      (r'^healthchecks(/.*)$', make_wsgi_view(HealthCheckApp(discover=['hospital.healthchecks.predictable']))),
-      # ...
-    )
+   from django.core.urlresolvers import patterns
+   from twod.wsgi import make_wsgi_view
+   from hospital.wsgi import HealthCheckApp
 
-https://pythonhosted.org/twod.wsgi/embedded-apps.html
+   urlpatterns = patterns('',
+       # ...
+       (r'^healthchecks(/.*)$', make_wsgi_view(HealthCheckApp(discover=['hospital.healthchecks.predictable']))),
+       # ...
+   )
+
+See `twod.wsgi documentation`_ for details.
 
 
 .. rubric:: Notes & references
 
 .. target-notes::
 
-.. _`nose`: https://nose.readthedocs.org/
+.. _`nose test runner`: https://nose.readthedocs.org/
 .. _`--all-modules option`:
    http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules
+.. _`Gunicorn documentation`: http://gunicorn.org/
+.. _`Chaussette documentation`: https://chaussette.readthedocs.org/
+.. _`Circus documentation`: http://circus.readthedocs.org/en/latest/
+.. _`Django`: https://www.djangoproject.com/
+.. _`twod.wsgi documentation`: https://pythonhosted.org/twod.wsgi/embedded-apps.html

@@ -14,6 +14,11 @@ from wsgiref.simple_server import make_server
 
 from hospital.cli import base_parser, HealthCheckProgram
 
+# Environment configuration
+HEALTHCHECKS = os.environ.get('HEALTHCHECKS')
+if HEALTHCHECKS:
+    HEALTHCHECKS = HEALTHCHECKS.split()
+
 
 class STATUS(object):
     """Pseudo-constant."""
@@ -151,8 +156,8 @@ def wsgi_parser(program=None):
     )
     return parser
 
+
 # WSGI APP endpoint
-HEALTHCHECKS = os.environ.get('HEALTHCHECKS', [os.path.abspath(os.getcwd())])
 application = HealthCheckApp(discover=HEALTHCHECKS)
 
 

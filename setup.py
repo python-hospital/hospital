@@ -44,7 +44,12 @@ REQUIREMENTS = [
 if IS_PYTHON2:
     REQUIREMENTS.extend(['mock'])
 
-ENTRY_POINTS = {}
+ENTRY_POINTS = {
+    'console_scripts': [
+        'hospital_serve = hospital.wsgi:main',
+        'hospital_cli = hospital.cli:main',
+    ]
+}
 
 
 if __name__ == '__main__':  # Don't run setup() when we import this module.

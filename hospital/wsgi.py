@@ -10,9 +10,8 @@
 import json
 import os
 import unittest
-from wsgiref.simple_server import make_server
 
-from hospital.cli import base_parser, HealthCheckProgram
+from hospital.cli import HealthCheckProgram
 
 
 class STATUS(object):
@@ -139,33 +138,17 @@ class HealthCheckApp(HealthCheckProgram):
         return [body]
 
 
-def wsgi_parser(program=None):
-    parser = base_parser(program)
-    parser.add_argument(
-        '--port',
-        action='store',
-        nargs='?',
-        type=int,
-        default='1515',
-        help="Port for webserver.",
-    )
-    return parser
-
-
-def main(program=None, args=None):
-    parser = wsgi_parser(program)
-    arguments = parser.parse_args(args)
-    healthchecks = arguments.healthchecks
-    if not healthchecks:
-        healthchecks = [os.path.abspath(os.getcwd())]
-    app = HealthCheckApp(discover=healthchecks)
-    httpd = make_server('', arguments.port, app)
-    server_address = httpd.socket.getsockname()
-    print("Serving on {ip} port {port}...".format(
-        ip=server_address[0],
-        port=server_address[1]))
-    httpd.serve_forever()
+HEALTHCHECKS = os.environ.get('HEALTHCHECKS')
+if not HEALTHCHECKS:
+    import sys
+    sys.stderr.write('Make sure to define the HEALTHCHECKS '
+                     'environment variable.\n')
+application = HealthCheckApp(discover=HEALTHCHECKS)
 
 
 if __name__ == '__main__':
+    import warning
+    warning.warn("You should now use hospital.serve instead of hospital.wsgi "
+                 "to run the standalone http server.", DeprecationWarning)
+    from hospital.serve import main
     main()

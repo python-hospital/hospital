@@ -46,7 +46,7 @@ if IS_PYTHON2:
 
 ENTRY_POINTS = {
     'console_scripts': [
-        'hospital_serve = hospital.serve:main',
+        'hospital_serve = hospital.wsgi:main',
     ]
 }
 

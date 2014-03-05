@@ -76,6 +76,9 @@ hospital.wsgi
 
 You can use :mod:`hospital.wsgi` to expose healthchecks over HTTP:
 
+Using the standalone HTTPD server
++++++++++++++++++++++++++++++++++
+
 .. code:: console
 
    $ hospital_serve hospital.healthchecks.predictable
@@ -120,6 +123,80 @@ The output is JSON:
            "unexpected_success": 0
        }
    }
+
+Using the WSGI endpoint
++++++++++++++++++++++++
+
+With Gunicorn
+-------------
+
+.. code:: console
+
+    export HEALTHCHECKS='hospital.healthchecks.predictable'
+    gunicorn -w 4 hospital.wsgi:application
+
+http://gunicorn.org/
+
+
+With Chaussette
+---------------
+
+.. code:: console
+
+    export HEALTHCHECKS='hospital.healthchecks.predictable'
+    chaussette hospital.wsgi.application
+
+http://chaussette.readthedocs.org/en/1.0/
+
+With circus
+-----------
+
+.. code:: ini
+
+    [watcher:yourproject-healthchecks]
+    cmd = venv/bin/chaussette --fd $(circus.sockets.yourproject-healthchecks) hospital.wsgi.application
+    numprocesses = 1
+    use_sockets = True
+    copy_env = True
+    
+    working_dir = path/to/yourproject
+    
+    stdout_stream.class = FileStream
+    stdout_stream.filename = /var/log/chaussette/wsgi_healthchecks_out.log
+    stdout_stream.time_format = [%Y/%m/%d | %H:%M:%S]
+    
+    stderr_stream.class = FileStream
+    stderr_stream.filename = /var/log/chaussette/wsgi_healthchecks_err.log
+    stderr_stream.time_format = [%Y/%m/%d | %H:%M:%S]
+
+    [socket:yourproject-healthchecks]
+    host = 127.0.0.1
+    port = 2014
+
+    [env:yourproject-healthchecks]
+    HEALTHCHECKS = hospital.healthchecks.predictable
+
+http://circus.readthedocs.org/en/latest/
+
+
+With twod.wsgi as a Django URL
+------------------------------
+
+.. code:: python
+
+    # urls.py
+    
+    from twod.wsgi import make_wsgi_view
+    from hospital.wsgi import HealthCheckApp
+    
+    urlpatterns = patterns('',
+      # ...
+      (r'^healthchecks(/.*)$', make_wsgi_view(HealthCheckApp(discover=['hospital.healthchecks.predictable']))),
+      # ...
+    )
+
+https://pythonhosted.org/twod.wsgi/embedded-apps.html
+
 
 .. rubric:: Notes & references
 

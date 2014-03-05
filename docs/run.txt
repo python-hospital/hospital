@@ -134,7 +134,6 @@ hospital.wsgi.application
 healthchecks to run in ``HEALTHCHECKS`` environment variable (space separated).
 
 
-********
 Gunicorn
 ********
 
@@ -152,7 +151,6 @@ Which can also be written in a single line:
 See `Gunicorn documentation`_ for details.
 
 
-**********
 Chaussette
 **********
 
@@ -170,7 +168,6 @@ Which can also be written in a single line:
 See `Chaussette documentation` for details.
 
 
-******
 Circus
 ******
 
@@ -206,7 +203,6 @@ Chaussette and a virtual environnement. Adapt it to your needs.
 See `Circus documentation`_ for details.
 
 
-********************
 twod.wsgi and Django
 ********************
 
@@ -226,6 +222,12 @@ healthchecks with `Django`_. In your project's :file:`urls.py` module:
    )
 
 See `twod.wsgi documentation`_ for details.
+
+Hospital and Django
+*******************
+
+If you need to run django healthchecks with hospital, don't forget to
+export the DJANGO_SETTINGS_MODULE variable.
 
 
 .. rubric:: Notes & references

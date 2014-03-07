@@ -126,17 +126,13 @@ The output is JSON:
    }
 
 
-*************************
-hospital.wsgi.application
-*************************
-
-:data:`hospital.wsgi.application` is a WSGI endpoint. It reads the list of
-healthchecks to run in ``HEALTHCHECKS`` environment variable (space separated).
-
-
 ********
 Gunicorn
 ********
+
+You can use :data:`hospital.wsgi.application` WSGI endpoint with `Gunicorn`.
+Setup the list of healthchecks to run in ``HEALTHCHECKS`` environment variable
+(space separated).
 
 .. code:: console
 
@@ -156,6 +152,10 @@ See `Gunicorn documentation`_ for details.
 Chaussette
 **********
 
+You can use :data:`hospital.wsgi.application` WSGI endpoint with `Chaussette`.
+Setup the list of healthchecks to run in ``HEALTHCHECKS`` environment variable
+(space separated).
+
 .. code:: console
 
    export HEALTHCHECKS='hospital.healthchecks.predictable'
@@ -167,16 +167,16 @@ Which can also be written in a single line:
 
    HEALTHCHECKS='hospital.healthchecks.predictable' chaussette hospital.wsgi.application
 
-See `Chaussette documentation` for details.
+See `Chaussette documentation`_ for details.
 
 
 ******
 Circus
 ******
 
-Here is a sample Circus configuration serving
+Here is a sample `Circus` configuration serving
 "hospital.healthchecks.predictable" healthchecks on port 2014, using
-Chaussette and a virtual environnement. Adapt it to your needs.
+`Chaussette` and a virtual environnement.
 
 .. code:: ini
 

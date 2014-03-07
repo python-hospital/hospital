@@ -43,7 +43,6 @@ REQUIREMENTS = [
 ]
 if IS_PYTHON2:
     REQUIREMENTS.extend(['mock'])
-
 ENTRY_POINTS = {}
 
 

@@ -8,11 +8,10 @@
 
 """
 import json
-import os
 import unittest
 from wsgiref.simple_server import make_server
 
-from hospital.cli import base_parser, HealthCheckProgram
+from hospital.cli import base_parser, HealthCheckProgram, HEALTHCHECKS
 
 
 class STATUS(object):
@@ -151,8 +150,8 @@ def wsgi_parser(program=None):
     )
     return parser
 
-# WSGI APP endpoint
-HEALTHCHECKS = os.environ.get('HEALTHCHECKS', [os.path.abspath(os.getcwd())])
+
+#: WSGI application endpoint.
 application = HealthCheckApp(discover=HEALTHCHECKS)
 
 

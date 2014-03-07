@@ -15,6 +15,14 @@ import unittest
 from hospital.loading import HealthCheckLoader
 
 
+# Environment configuration
+HEALTHCHECKS = os.environ.get('HEALTHCHECKS')
+if HEALTHCHECKS:
+    HEALTHCHECKS = HEALTHCHECKS.split()
+else:
+    HEALTHCHECKS = [os.path.abspath(os.getcwd())]
+
+
 def base_parser(program):
     """Return base argument parser."""
     parser = argparse.ArgumentParser(
@@ -110,10 +118,11 @@ def main(program=None, args=None, stream=sys.stderr):
     """Collect and run healthchecks, output to stdout and stderr."""
     parser = cli_parser(program)
     arguments = parser.parse_args(args)
-    healthchecks = arguments.healthchecks
+    if arguments.healthchecks:
+        healthchecks = arguments.healthchecks
+    else:
+        healthchecks = HEALTHCHECKS
     verbosity = 2 if arguments.verbose else 1
-    if not healthchecks:
-        healthchecks = [os.path.abspath(os.getcwd())]
     app = HealthCheckProgram(
         discover=healthchecks,
         stream=stream,

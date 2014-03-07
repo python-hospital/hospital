@@ -14,6 +14,7 @@ import unittest
 
 from hospital.loading import HealthCheckLoader
 
+
 # Environment configuration
 HEALTHCHECKS = os.environ.get('HEALTHCHECKS')
 if HEALTHCHECKS:

@@ -8,7 +8,6 @@
 
 """
 import json
-import os
 import unittest
 from wsgiref.simple_server import make_server
 
@@ -152,7 +151,7 @@ def wsgi_parser(program=None):
     return parser
 
 
-# WSGI APP endpoint
+#: WSGI application endpoint.
 application = HealthCheckApp(discover=HEALTHCHECKS)
 
 

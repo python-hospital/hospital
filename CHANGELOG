@@ -12,6 +12,9 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
   documentation about running healthcheck service with Gunicorn, Chaussette,
   Circus, and Django via twod.wsgi.
 
+- Feature #47: ``hospital-cli`` and ``hospital-serve`` commands are a
+  convenient way to use ``hospital.cli`` and ``hospital.wsgi``.
+
 
 0.5 (2014-02-28)
 ----------------

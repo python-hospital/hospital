@@ -7,14 +7,14 @@ collect and run healthchecks:
 
 1. run a shell command:
 
-   * using `hospital.cli`_;
+   * using `hospital-cli`_ command;
    * using `nose`_.
 
-2. perform GET requests to a web service: using `hospital.wsgi`_...
+2. perform GET requests to a web service: using :mod:`hospital.wsgi` module...
 
    * with `Chaussette`_, `Gunicorn`_ or `Circus`_;
    * with `twod.wsgi and Django`_;
-   * as `a (basic) standalone server <hospital.wsgi>`_.
+   * as a (basic) standalone server with builtin `hospital-serve`_ command.
 
 If you want to setup another runner, notice that you can use the
 :func:`~hospital.core.is_healthcheck` function to verify whether an object is
@@ -22,21 +22,22 @@ a healthcheck or not.
 
 
 ************
-hospital.cli
+hospital-cli
 ************
 
-You can use :mod:`hospital.cli` to collect and run healthchecks:
+You can use ``hospital-cli`` to collect and run healthchecks in a shell
+session:
 
 .. code:: console
 
-   $ python -m hospital.cli hospital.healthchecks.predictable
+   $ hospital-cli hospital.healthchecks.predictable
    .
    ----------------------------------------------------------------------
    Ran 1 test in 0.001s
 
    OK
 
-See ``python -m hospital.cli --help`` for detailed usage and options.
+See ``hospital-cli --help`` for detailed usage and options.
 
 
 ****
@@ -74,18 +75,18 @@ With `nose`, it could be:
    "healthchecks".
 
 
-*************
-hospital.wsgi
-*************
+**************
+hospital-serve
+**************
 
 :mod:`hospital.wsgi` embeds a basic HTTP server:
 
 .. code:: console
 
-   $ python -m hospital.wsgi hospital.healthchecks.predictable
+   $ hospital-serve hospital.healthchecks.predictable
    Serving on 0.0.0.0 port 1515...
 
-See ``python -m hospital.wsgi --help`` for detailed usage and options.
+See ``hospital-serve --help`` for detailed usage and options.
 
 Each time you perform a GET on the server's root, healthchecks are
 collected and run.

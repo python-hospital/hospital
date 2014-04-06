@@ -48,6 +48,9 @@ ENTRY_POINTS = {
         'hospital-cli = hospital.cli:main',
         'hospital-serve = hospital.wsgi:main',
     ],
+    'pytest11': [
+        'hospital = hospital.pytest_plugin',
+    ],
 }
 
 

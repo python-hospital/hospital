@@ -18,15 +18,17 @@ def pytest_addoption(parser):
         help="run healthchecks.")
 
 
-def pytest_runtest_setup(item):
-    import pytest  # Import here because python-hospital does not
-                   # require py.test to be installed.
-    if item.config.getoption("--healthcheck"):
-        if "healthcheck" not in item.keywords:
-            raise pytest.skip("not a health check")
+def pytest_configure(config):
+    """Implements the `--healthcheck` flag.
+    `--healthcheck` flag is equivalent to `-m healthcheck`.
+    """
+    if config.getoption("healthcheck"):
+        # TODO: I didn't see a public API for this, but maybe I
+        # missed something.
+        setattr(config.option, "markexpr", "healthcheck")
 
 
 def pytest_collection_modifyitems(session, config, items):
     for item in items:
         if is_healthcheck(item.function):
-            item.add_marker('healthcheck')
+            item.add_marker("healthcheck")

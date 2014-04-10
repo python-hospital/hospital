@@ -8,7 +8,8 @@ collect and run healthchecks:
 1. run a shell command:
 
    * using `hospital-cli`_ command;
-   * using `nose`_.
+   * using `nose`_;
+   * using `py.test`_.
 
 2. perform GET requests to a web service: using :mod:`hospital.wsgi` module...
 
@@ -53,7 +54,7 @@ In the examples below, we run health checks of `hospital` project.
    .
    ----------------------------------------------------------------------
    Ran 1 test in 0.001s
-   
+
    OK
 
 Reciprocally, you may want to skip healthchecks when you run tests.
@@ -62,7 +63,7 @@ With `nose`, it could be:
 .. code:: console
 
    $ nosetests --all-modules --attr='!is_healthcheck' hospital.healthchecks
-   
+
    ----------------------------------------------------------------------
    Ran 0 tests in 0.000s
 
@@ -73,6 +74,52 @@ With `nose`, it could be:
    `--all-modules option`_ makes Nose collect tests in all modules. Without the
    option, it would have collected modules or packages named "tests", and not
    "healthchecks".
+
+
+*******
+py.test
+*******
+
+hospital provides a ``py.test`` plugin to run health checks. It provides
+the ``--healthcheck`` command-line switch, and registers a `pytest marker`_
+called "healthcheck".
+
+
+.. code:: console
+
+   $ py.test --healthcheck foo
+   ======================================== test session starts ========================================
+   platform darwin -- Python 2.7.5 -- py-1.4.20 -- pytest-2.5.2
+   plugins: hospital
+   collected 3 items
+
+   foo/test_foo.py ..
+
+   ============================= 1 tests deselected by "-m 'healthcheck'" ==============================
+   ============================== 2 passed, 1 deselected in 0.01 seconds ===============================
+
+
+The ``--healthcheck`` command-line switch is equivalent to ``-m healthcheck``.
+In the example above, we see that three tests were collected, and two
+of those were health checks.
+
+Tests that use hospital's ``@healthcheck`` decorator are automatically marked
+with ``@pytest.mark.healthcheck``.
+
+As another example, here is how to run only non-healthchecks:
+
+.. code:: console
+
+   $ py.test -m "not healthcheck" foo
+   ======================================== test session starts ========================================
+   platform darwin -- Python 2.7.5 -- py-1.4.20 -- pytest-2.5.2
+   plugins: hospital
+   collected 3 items
+
+   foo/test_foo.py .
+
+   =========================== 2 tests deselected by "-m 'not healthcheck'" ============================
+   ============================== 1 passed, 2 deselected in 0.01 seconds ===============================
 
 
 **************
@@ -236,6 +283,7 @@ See `twod.wsgi documentation`_ for details.
 .. _`nose test runner`: https://nose.readthedocs.org/
 .. _`--all-modules option`:
    http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules
+.. _`pytest marker`: http://pytest.org/latest/markers.html
 .. _`Gunicorn documentation`: http://gunicorn.org/
 .. _`Chaussette documentation`: https://chaussette.readthedocs.org/
 .. _`Circus documentation`: http://circus.readthedocs.org/en/latest/

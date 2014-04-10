@@ -29,4 +29,4 @@ def pytest_runtest_setup(item):
 def pytest_collection_modifyitems(session, config, items):
     for item in items:
         if is_healthcheck(item.function):
-            item.keywords._markers['healthcheck'] = True
+            item.add_marker('healthcheck')

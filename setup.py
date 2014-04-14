@@ -37,7 +37,7 @@ KEYWORDS = [
 ]
 PACKAGES = [NAME.replace('-', '_')]
 REQUIREMENTS = [
-    'setuptools',
+    'setuptools>=0.7',
     'requests',
     'six',
 ]

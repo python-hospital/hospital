@@ -21,7 +21,7 @@ def get_metadata(distribution):
     ['BSD']
 
     """
-    raw_metadata = distribution.get_metadata(distribution.PKG_INFO)
+    raw_metadata = distribution.get_metadata('PKG-INFO')
     parsed_metadata = email.parser.Parser().parsestr(raw_metadata)
     metadata = {}
     for key, value in parsed_metadata.items():

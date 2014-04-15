@@ -1,10 +1,25 @@
 # -*- coding: utf-8 -*-
 """Utilities to discover and load health checks."""
-import os
+import importlib
+import inspect
+import pkgutil
 import unittest
-import sys
 
 from hospital.core import is_healthcheck
+
+
+def is_package(module):
+    """Return True if module object is a package.
+
+    >>> import hospital
+    >>> is_package(hospital)
+    True
+    >>> import hospital.api
+    >>> is_package(hospital.api)
+    False
+
+    """
+    return inspect.getmodulename(module.__file__) == '__init__'
 
 
 class HealthCheckLoader(unittest.TestLoader):
@@ -79,9 +94,23 @@ class HealthCheckLoader(unittest.TestLoader):
                                                                   module)
         return self.filter_suite(suite)
 
+    def loadTestsFromPackage(self, package):
+        """Discover and load tests from modules in package."""
+        tests = []
+        packages = pkgutil.walk_packages(package.__path__)
+        for (loader, module_name, is_pkg) in packages:
+            full_name = '{}.{}'.format(package.__name__, module_name)
+            tests.append(self.loadTestsFromName(full_name))
+            if is_pkg:
+                sub_package = importlib.import_module(full_name)
+                tests.append(self.loadTestsFromPackage(sub_package))
+        suite = self.suiteClass(tests)
+        return self.filter_suite(suite)
+
     def discover(self, start_dir, pattern='*', top_level_dir=None):
+        """Discover healthchecks in either a package, module or directory."""
         try:
-            __import__(start_dir)
+            module = importlib.import_module(start_dir)
         except ImportError:
             # Maybe a filename.
             return super(HealthCheckLoader, self).discover(
@@ -89,11 +118,7 @@ class HealthCheckLoader(unittest.TestLoader):
                 pattern=pattern,
                 top_level_dir=top_level_dir)
         else:
-            start_module = sys.modules[start_dir]
-            if os.path.basename(start_module.__file__).startswith('__init__.'):
-                return super(HealthCheckLoader, self).discover(
-                    start_dir=os.path.dirname(start_module.__file__),
-                    pattern=pattern,
-                    top_level_dir=None)
-            else:  # It is a single module.
-                return self.loadTestsFromModule(start_module)
+            if is_package(module):
+                return self.loadTestsFromPackage(module)
+            else:
+                return self.loadTestsFromModule(module)

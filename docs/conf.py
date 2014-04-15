@@ -48,7 +48,7 @@ master_doc = 'index'
 # General information about the project.
 project = u'hospital'
 project_slug = re.sub(r'([\w_.-]+)', u'-', project)
-copyright = u'2013 - Benoît Bryon'
+copyright = u'2013-2014 Benoît Bryon - BSD license'
 author = u'Benoit Bryon'
 author_slug = re.sub(r'([\w_.-]+)', u'-', author)
 

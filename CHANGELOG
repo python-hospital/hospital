@@ -17,6 +17,9 @@ Bugfixes.
 
 - Feature #54: README (and documentation index) shows a simple example.
 
+- Bug #51: documentation footer now mentions "BSD license" next to the
+  copyright. Was missing, readers could believe the project is not open source.
+
 
 0.6 (2014-03-07)
 ----------------

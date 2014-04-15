@@ -45,7 +45,7 @@ You can reuse test libraries, like :mod:`unittest`:
        def test_http_200(self):
            """`hospital` online documentation returns HTTP 200."""
            url = 'http://hospital.readthedocs.org/en/0.1/'
-	   hospital.assert_http_response(url, status_code=200)
+           hospital.assert_http_response(url, status_code=200)
 
 `Hospital` provides a set of useful :doc:`/api/assertions` and :doc:`health
 check suites </api/healthchecks>`.

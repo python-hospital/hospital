@@ -15,6 +15,8 @@ Bugfixes.
   within the project` and `ValueError: Attempted relative import in
   non-package`.
 
+- Feature #54: README (and documentation index) shows a simple example.
+
 
 0.6 (2014-03-07)
 ----------------

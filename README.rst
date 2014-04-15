@@ -19,6 +19,32 @@ Health checks are kind of tests, applied to running applications and services:
 * in case of incidents, use healthchecks to diagnose problems.
 
 
+*******
+Example
+*******
+
+In your project's root package, have a ``healthchecks`` package or module,
+where you assert your (running) application or service is ok:
+
+.. code:: python
+
+   import unittest
+   import hospital
+
+   @hospital.healthcheck
+   class DocumentationHealthCheck(unittest.TestCase):
+       def test_http_200(self):
+           url = 'http://hospital.readthedocs.org/en/0.6/'
+           hospital.assert_http_response(url, status_code=200)
+
+Then you can collect and run the healthchecks with command line or web
+service. Here is an example with command line:
+
+.. code:: console
+
+   $ hospital-cli <YOUR-PACKAGE>.healthchecks
+
+
 **************
 Project status
 **************

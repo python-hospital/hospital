@@ -8,7 +8,7 @@ def pytest_configure(config):
 
 def pytest_collection_modifyitems(session, config, items):
     for item in items:
-        if is_healthcheck(item.function):
+        if is_healthcheck(item.cls) or is_healthcheck(item.function):
             item.add_marker("healthcheck")
 
 

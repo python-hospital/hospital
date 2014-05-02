@@ -8,6 +8,8 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.8 (unreleased)
 ----------------
 
+- Feature #65: added support for Python 3.4.
+
 - Bug #63: applied temporary workaround on Travis configuration.
   See https://github.com/travis-ci/travis-ci/issues/2218.
 

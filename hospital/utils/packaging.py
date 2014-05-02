@@ -43,6 +43,7 @@ def get_classifiers(distribution):
     License :: OSI Approved :: BSD License
     Programming Language :: Python :: 2.7
     Programming Language :: Python :: 3.3
+    Programming Language :: Python :: 3.4
 
     """
     classifiers = get_metadata(distribution)['Classifier']
@@ -57,7 +58,7 @@ def get_supported_python_versions(distribution):
     >>> dist = pkg_resources.get_distribution('hospital')
     >>> from hospital.utils.packaging import get_supported_python_versions
     >>> get_supported_python_versions(dist)
-    ['2.7', '3.3']
+    ['2.7', '3.3', '3.4']
 
     """
     classifiers = get_classifiers(distribution)

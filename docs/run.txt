@@ -80,10 +80,8 @@ With `nose`, it could be:
 py.test
 *******
 
-hospital provides a ``py.test`` plugin to run health checks. It provides
-the ``--healthcheck`` command-line switch, and registers a `pytest marker`_
-called "healthcheck".
-
+hospital provides a `pytest` plugin to run healthchecks. It registers a `pytest
+marker`_ called "healthcheck".
 
 .. code:: console
 
@@ -99,7 +97,6 @@ called "healthcheck".
    ============================== 2 passed, 1 deselected in 0.01 seconds ===============================
 
 
-The ``--healthcheck`` command-line switch is equivalent to ``-m healthcheck``.
 In the example above, we see that three tests were collected, and two
 of those were health checks.
 
@@ -283,6 +280,7 @@ See `twod.wsgi documentation`_ for details.
 .. _`nose test runner`: https://nose.readthedocs.org/
 .. _`--all-modules option`:
    http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules
+.. _`pytest`: http://pytest.org/
 .. _`pytest marker`: http://pytest.org/latest/markers.html
 .. _`Gunicorn documentation`: http://gunicorn.org/
 .. _`Chaussette documentation`: https://chaussette.readthedocs.org/

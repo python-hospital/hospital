@@ -1,4 +1,4 @@
-from .core import is_healthcheck
+from hospital.core import is_healthcheck
 
 
 def pytest_configure(config):

@@ -7,14 +7,7 @@ PIP = pip
 TOX = tox
 
 
-.PHONY: all help develop clean distclean maintainer-clean test test-app healthcheck sphinx readme documentation release
-
-
-# Default target. Does nothing.
-all:
-	@echo "Reference card for usual actions in development environment."
-	@echo "Nothing to do by default."
-	@echo "Try 'make help'."
+.PHONY: help develop clean distclean maintainer-clean test test-app healthcheck sphinx readme documentation release
 
 
 #: help - Display callable targets.

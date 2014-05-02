@@ -10,6 +10,9 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 
 - Feature #65: added support for Python 3.4.
 
+- Refactoring #62: moved tests outside distribution, i.e. ``hospital.tests``
+  is no longer available. Tests now live in hospital's repository only.
+
 - Bug #63: applied temporary workaround on Travis configuration.
   See https://github.com/travis-ci/travis-ci/issues/2218.
 

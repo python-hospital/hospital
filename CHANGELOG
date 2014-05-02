@@ -13,9 +13,6 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 - Refactoring #62: moved tests outside distribution, i.e. ``hospital.tests``
   is no longer available. Tests now live in hospital's repository only.
 
-- Bug #63: applied temporary workaround on Travis configuration.
-  See https://github.com/travis-ci/travis-ci/issues/2218.
-
 - Refactoring #59: removed nose and rednose from sphinx requirements in
   tox.ini.
 

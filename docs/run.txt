@@ -85,7 +85,7 @@ marker`_ called "healthcheck".
 
 .. code:: console
 
-   $ py.test --healthcheck foo
+   $ py.test -m healthcheck foo
    ======================================== test session starts ========================================
    platform darwin -- Python 2.7.5 -- py-1.4.20 -- pytest-2.5.2
    plugins: hospital
@@ -100,8 +100,8 @@ marker`_ called "healthcheck".
 In the example above, we see that three tests were collected, and two
 of those were health checks.
 
-Tests that use hospital's ``@healthcheck`` decorator are automatically marked
-with ``@pytest.mark.healthcheck``.
+Tests that use hospital's :func:`~hospital.core.healthcheck` decorator are
+automatically marked with ``@pytest.mark.healthcheck``.
 
 As another example, here is how to run only non-healthchecks:
 

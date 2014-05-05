@@ -2,15 +2,22 @@
 Authors & contributors
 ######################
 
-Inspired by:
+Maintainer: Benoît Bryon <benoit@marmelune.net>
+
+Contributors:
+
+* Rémy Hubscher <hubscher.remy@gmail.com>
+* Frank Tobia <frank.tobia@gmail.com>
+
+Full list at https://github.com/python-hospital/hospital/graphs/contributors.
+
+`hospital` was also inspired by:
 
 * `django-doctor`_, by Jon Lønne <jon@funkbit.no>
 * `django-health-check`_, by Kristian Øllegaard <kristian@kristian.io>
 * `django-smoketest`_, by Anders Pearson <anders@columbia.edu>
 
-Maintainer:
-
-* Benoît Bryon <benoit@marmelune.net>
+See also :doc:`/about/alternatives`.
 
 
 .. rubric:: References

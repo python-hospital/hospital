@@ -8,6 +8,10 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.8 (unreleased)
 ----------------
 
+Integration with pytest and support for Python 3.4.
+
+- Feature #50: pytest can collect and run healthchecks.
+
 - Feature #65: added support for Python 3.4.
 
 - Refactoring #62: moved tests outside distribution, i.e. ``hospital.tests``

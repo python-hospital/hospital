@@ -127,7 +127,12 @@ def main(program=None, args=None, stream=sys.stderr):
         discover=healthchecks,
         stream=stream,
         verbosity=verbosity)
-    app()
+    result = app()
+    if (result.wasSuccessful()):
+        sys.exit(0)
+    else:
+        sys.exit(1)
+
 
 
 if __name__ == '__main__':

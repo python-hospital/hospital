@@ -50,9 +50,8 @@ Project status
 **************
 
 `hospital` is not full-featured yet. Some important features are in the
-`roadmap <https://github.com/python-hospital/hospital/issues/milestones>`_.
-See also `vision
-<http://hospital.readthedocs.org/en/latest/about/vision.html>`_.
+`roadmap <https://github.com/python-hospital/hospital/milestones>`_. See also
+`vision <http://hospital.readthedocs.org/en/latest/about/vision.html>`_.
 
 Of course, any ideas, feedback or help are welcome :)
 
@@ -70,4 +69,4 @@ Resources
 * Continuous integration: https://travis-ci.org/python-hospital/hospital
 * Bugs & feature requests: https://github.com/python-hospital/hospital/issues
 * Changelog: https://hospital.readthedocs.org/en/latest/about/changelog.html
-* Roadmap: https://github.com/python-hospital/hospital/issues/milestones
+* Roadmap: https://github.com/python-hospital/hospital/milestones

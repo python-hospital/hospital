@@ -5,10 +5,13 @@ This document describes changes between past releases. For information about
 future releases, check `milestones`_ and :doc:`/about/vision`.
 
 
-0.9 (unreleased)
-----------------
+0.8.1 (unreleased)
+------------------
 
-- Nothing changed yet.
+Fixing some URLs in documentation.
+
+- Bug #76: fixed some broken links in documentation (milestones, pytest
+  markers). Checking documentation links as part of Sphinx tests.
 
 
 0.8 (2014-05-05)
@@ -149,4 +152,4 @@ Documentation review, API refactoring, addition of some assertions.
 
 .. target-notes::
 
-.. _`milestones`: https://github.com/python-hospital/hospital/issues/milestones
+.. _`milestones`: https://github.com/python-hospital/hospital/milestones

@@ -281,7 +281,7 @@ See `twod.wsgi documentation`_ for details.
 .. _`--all-modules option`:
    http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules
 .. _`pytest`: http://pytest.org/
-.. _`pytest marker`: http://pytest.org/latest/markers.html
+.. _`pytest marker`: http://pytest.org/latest/mark.html
 .. _`Gunicorn documentation`: http://gunicorn.org/
 .. _`Chaussette documentation`: https://chaussette.readthedocs.org/
 .. _`Circus documentation`: http://circus.readthedocs.org/en/latest/

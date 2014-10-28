@@ -70,4 +70,4 @@ Resources
 * Continuous integration: https://travis-ci.org/python-hospital/hospital
 * Bugs & feature requests: https://github.com/python-hospital/hospital/issues
 * Changelog: https://hospital.readthedocs.org/en/latest/about/changelog.html
-* Roadmap: https://github.com/python-hospital/hospital/issues/milestones
+* Roadmap: https://github.com/python-hospital/hospital/milestones

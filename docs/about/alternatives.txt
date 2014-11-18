@@ -51,7 +51,7 @@ django-smoketest
 .. target-notes::
 
 .. _`python-hospital`: https://github.com/python-hospital
-.. _`Django`: https://djangoproject.com
+.. _`Django`: https://www.djangoproject.com/
 .. _`django-health-check`: https://pypi.python.org/pypi/django-health-check
 .. _`django-doctor`: https://pypi.python.org/pypi/django-doctor
 .. _`django-smoketest`: https://pypi.python.org/pypi/django-smoketest

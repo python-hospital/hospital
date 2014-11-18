@@ -20,8 +20,8 @@ class PyTestPluginTestCase(unittest.TestCase):
         exit_code = process.wait()
         self.assertEqual(exit_code, 0)
         stdout = str(process.stdout.read())
-        self.assertIn('collected 1 items', stdout)
-        self.assertIn('===== 1 passed in ', stdout)
+        self.assertIn('collected 2 items', stdout)
+        self.assertIn('===== 1 passed, 1 skipped in ', stdout)
 
     def test_healthcheck_deselect(self):
         """py.test with '-m "not healthcheck" does not select healthchecks."""
@@ -38,5 +38,5 @@ class PyTestPluginTestCase(unittest.TestCase):
         exit_code = process.wait()
         self.assertEqual(exit_code, 0)
         stdout = str(process.stdout.read())
-        self.assertIn('collected 1 items', stdout)
-        self.assertIn('===== 1 deselected in ', stdout)
+        self.assertIn('collected 2 items', stdout)
+        self.assertIn('===== 2 deselected in ', stdout)

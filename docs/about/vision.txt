@@ -99,5 +99,5 @@ See :doc:`alternatives` for details.
 
 .. target-notes::
 
-.. _`Python`: http://python.org
+.. _`Python`: https://www.python.org/
 .. _`python-hospital`: https://github.com/python-hospital

@@ -39,11 +39,11 @@ class HealthCheckProgramTestCase(unittest.TestCase):
             stream=stream)
         output = stream.getvalue()
         self.assertTrue(output.startswith(
-            '.\n'
+            '.s\n'
             '-------------------------------------'
             '---------------------------------\n'
-            'Ran 1 test in '))
-        self.assertTrue(output.endswith('s\n\nOK\n'))
+            'Ran 2 tests in '))
+        self.assertTrue(output.endswith('s\n\nOK (skipped=1)\n'))
 
     def test_discovery_module(self):
         """HealthCheckProgram discovers tests in package."""
@@ -53,8 +53,8 @@ class HealthCheckProgramTestCase(unittest.TestCase):
             stream=stream)
         output = stream.getvalue()
         self.assertTrue(output.startswith(
-            '..\n'
+            '..s\n'
             '-------------------------------------'
             '---------------------------------\n'
-            'Ran 2 tests in '))
-        self.assertTrue(output.endswith('s\n\nOK\n'))
+            'Ran 3 tests in '))
+        self.assertTrue(output.endswith('s\n\nOK (skipped=1)\n'))

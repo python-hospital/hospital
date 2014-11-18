@@ -277,13 +277,13 @@ See `twod.wsgi documentation`_ for details.
 
 .. target-notes::
 
-.. _`nose test runner`: https://nose.readthedocs.org/
+.. _`nose test runner`: https://pypi.python.org/pypi/nose
 .. _`--all-modules option`:
    http://nose.readthedocs.org/en/latest/usage.html#cmdoption--all-modules
 .. _`pytest`: http://pytest.org/
 .. _`pytest marker`: http://pytest.org/latest/mark.html
 .. _`Gunicorn documentation`: http://gunicorn.org/
-.. _`Chaussette documentation`: https://chaussette.readthedocs.org/
-.. _`Circus documentation`: http://circus.readthedocs.org/en/latest/
+.. _`Chaussette documentation`: https://pypi.python.org/pypi/chaussette
+.. _`Circus documentation`: https://circus.readthedocs.org/en/latest/
 .. _`Django`: https://www.djangoproject.com/
 .. _`twod.wsgi documentation`: https://pythonhosted.org/twod.wsgi/embedded-apps.html

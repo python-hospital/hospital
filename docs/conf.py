@@ -189,7 +189,7 @@ htmlhelp_basename = u'{project}doc'.format(project=project_slug)
 # -- Options for sphinx.ext.intersphinx ---------------------------------------
 
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/3', None),
+    'python': ('https://docs.python.org/3', None),
 }
 
 

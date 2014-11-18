@@ -8,7 +8,12 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+Bugfixes around CLI and WSGI.
+
+- Bug #78: hospital-wsgi supports unittest's "skip" feature (was raising
+  errors).
+
+- Refactoring #80: updated some links in documentation (permanent redirects).
 
 
 0.8.1 (2014-10-28)

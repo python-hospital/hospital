@@ -21,3 +21,12 @@ class ForeverPassingHealthCheck(unittest.TestCase):
     def test_true(self):
         """Health checks are collected."""
         self.assertTrue(True)
+
+
+@healthcheck
+class ForeverSkippedHealthCheck(unittest.TestCase):
+    """Healthcheck that is always skipped."""
+    def test_skip(self):
+        """Health checks can be skipped."""
+        self.skipTest('This healthcheck is always skipped, just to make sure '
+                      'healthchecks can be skipped.')

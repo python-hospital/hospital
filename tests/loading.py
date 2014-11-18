@@ -33,7 +33,7 @@ class HealthCheckLoaderTestCase(unittest.TestCase):
         """HealthCheckLoader discovers healthchecks in Python packages."""
         loader = HealthCheckLoader()
         suite = loader.discover('hospital.healthchecks.predictable')
-        self.assertEqual(suite.countTestCases(), 1)
+        self.assertEqual(suite.countTestCases(), 2)
 
     def test_discovery_of_module_by_python_path_in_stdlib(self):
         """HealthCheckLoader can scan locations in stdlib."""

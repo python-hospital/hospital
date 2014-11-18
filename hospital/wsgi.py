@@ -42,9 +42,9 @@ class HealthCheckResult(unittest.TestResult):
         super(HealthCheckResult, self).addError(test, err)
         self.results.append((STATUS.ERROR, test, err))
 
-    def addSkip(self, test):
-        super(HealthCheckResult, self).addSkip(test)
-        self.results.append((STATUS.SKIP, test, None))
+    def addSkip(self, test, reason):
+        super(HealthCheckResult, self).addSkip(test, reason)
+        self.results.append((STATUS.SKIP, test, reason))
 
     def addFailure(self, test, err):
         super(HealthCheckResult, self).addFailure(test, err)

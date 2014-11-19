@@ -2,6 +2,10 @@
 """Tests around :mod:`hospital.cli`."""
 import unittest
 import sys
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from six.moves import StringIO
 
@@ -31,7 +35,8 @@ class CaptureStdStreams(object):
 
 class HealthCheckProgramTestCase(unittest.TestCase):
     """Tests around :class:`hospital.cli.HealthCheckProgram`."""
-    def test_output(self):
+    @mock.patch('sys.exit')
+    def test_output(self, exit_mock):
         """HealthCheckProgram runs healthchecks."""
         stream = StringIO()
         cli.main(
@@ -44,8 +49,10 @@ class HealthCheckProgramTestCase(unittest.TestCase):
             '---------------------------------\n'
             'Ran 2 tests in '))
         self.assertTrue(output.endswith('s\n\nOK (skipped=1)\n'))
+        exit_mock.assert_called_once_with(0)
 
-    def test_discovery_module(self):
+    @mock.patch('sys.exit')
+    def test_discovery_module(self, exit_mock):
         """HealthCheckProgram discovers tests in package."""
         stream = StringIO()
         cli.main(
@@ -58,3 +65,22 @@ class HealthCheckProgramTestCase(unittest.TestCase):
             '---------------------------------\n'
             'Ran 3 tests in '))
         self.assertTrue(output.endswith('s\n\nOK (skipped=1)\n'))
+        exit_mock.assert_called_once_with(0)
+
+    @mock.patch('hospital.healthchecks.predictable'
+                '.ForeverPassingHealthCheck.test_true')
+    @mock.patch('sys.exit')
+    def test_failure(self, exit_mock, healthcheck_mock):
+        """HealthCheckProgram exits with code 1 on failure."""
+        healthcheck_mock.side_effect = AssertionError
+        stream = StringIO()
+        cli.main(
+            args=['hospital.healthchecks.predictable'],
+            stream=stream)
+        output = stream.getvalue()
+        print(output)
+        self.assertTrue(output.startswith('Fs\n'))
+        self.assertIn('Ran 2 tests in ', output)
+        self.assertTrue(output.endswith(
+            's\n\nFAILED (failures=1, skipped=1)\n'))
+        exit_mock.assert_called_once_with(1)

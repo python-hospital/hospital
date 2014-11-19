@@ -10,6 +10,9 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 
 Bugfixes around CLI and WSGI.
 
+- Bug #73: hospital-cli exits with code 0 on success, 1 in case of failure (was
+  always returning 0, even if some healthchecks reported errors).
+  
 - Bug #78: hospital-wsgi supports unittest's "skip" feature (was raising
   errors).
 

@@ -5,7 +5,7 @@ This document describes changes between past releases. For information about
 future releases, check `milestones`_ and :doc:`/about/vision`.
 
 
-0.9 (unreleased)
+0.9 (2014-11-19)
 ----------------
 
 Bugfixes around CLI and WSGI.

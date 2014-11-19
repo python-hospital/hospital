@@ -78,7 +78,6 @@ class HealthCheckProgramTestCase(unittest.TestCase):
             args=['hospital.healthchecks.predictable'],
             stream=stream)
         output = stream.getvalue()
-        print(output)
         self.assertTrue(output.startswith('Fs\n'))
         self.assertIn('Ran 2 tests in ', output)
         self.assertTrue(output.endswith(
